@@ -10,6 +10,9 @@ index.html      → Domov / O mne
 aktivity.html   → Moje aktivity
 zivot.html      → Môj život (vertikálna časová os s míľnikmi)
 skola.html      → Aktivita v škole (zaheslovaná podstránka)
+meranie.html    → podstránka Škola → Meranie (posuvné meradlo)
+                  potrebuje v koreňovom priečinku súbory
+                  posuvka-anim.gif a posuvné_meradlo.html
 css/style.css   → celý dizajn (farby, typografia, layout)
 js/main.js      → mobilné menu, rok v pätičke
 js/gate.js      → zámok na heslo pre skola.html
