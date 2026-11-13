@@ -32,10 +32,9 @@ html {
 
 body {
     margin: 0;
-    /* Jasnejšie kruhy a výraznejšia vrstvená dynamika */
     background: radial-gradient(circle at 20% 30%, rgba(19, 7, 199, 0.48) 0%, transparent 38%), radial-gradient(circle at 80% 70%, rgba(240, 223, 169, 0.42) 0%, transparent 40%), radial-gradient(circle at 50% 20%, rgba(82, 121, 111, 0.35) 0%, transparent 42%), linear-gradient(135deg, var(--paper) 0%, var(--paper-dim) 100%);
     background-size: 300% 300%;
-    animation: waveFlow 7s ease-in-out infinite;
+    animation: waveFlow 5s ease-in-out infinite;
     color: var(--ink);
     font-family: var(--sans);
     font-size: 17px;
@@ -181,36 +180,6 @@ section {
     display: none;
 }
 
-@media (max-width: 640px) {
-    .nav-links {
-        position: fixed;
-        inset: 62px 0 auto 0;
-        flex-direction: column;
-        background: var(--paper);
-        padding: 8px var(--edge) 20px;
-        border-bottom: 1px solid rgba(27, 67, 50, 0.12);
-        transform: translateY(-8px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.18s ease, transform 0.18s ease;
-    }
-    .nav-links.open {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-    }
-    .nav-toggle {
-        display: block;
-        background: none;
-        border: 1px solid var(--forest);
-        border-radius: 6px;
-        width: 38px;
-        height: 34px;
-        color: var(--forest);
-        font-size: 1.1rem;
-    }
-}
-
 
 /* ---------- buttons / links ---------- */
 
@@ -267,12 +236,6 @@ section {
     grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(28px, 5vw, 56px);
     align-items: center;
-}
-
-@media (max-width: 860px) {
-    .hero .wrap {
-        grid-template-columns: 1fr;
-    }
 }
 
 .hero-photo {
@@ -339,8 +302,8 @@ hr.rule {
 
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
 }
 
 .card {
@@ -529,13 +492,6 @@ hr.rule {
     background: linear-gradient(var(--sage), var(--sage-light));
 }
 
-@media (min-width: 760px) {
-    .timeline::before {
-        left: 50%;
-        transform: translateX(-1px);
-    }
-}
-
 .milestone {
     position: relative;
     padding-left: 56px;
@@ -554,32 +510,6 @@ hr.rule {
     border-radius: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 0 2px var(--forest);
-}
-
-@media (min-width: 760px) {
-    .milestone {
-        width: calc(50% - 44px);
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .milestone::before {
-        transform: translateX(-50%);
-    }
-    .milestone:nth-child(odd) {
-        margin-left: 0;
-        text-align: right;
-        padding-right: 40px;
-    }
-    .milestone:nth-child(odd)::before {
-        left: calc(100% + 44px);
-    }
-    .milestone:nth-child(even) {
-        margin-left: calc(50% + 44px);
-        padding-left: 40px;
-    }
-    .milestone:nth-child(even)::before {
-        left: -44px;
-    }
 }
 
 .milestone-year {
@@ -603,88 +533,6 @@ hr.rule {
     background: rgba(201, 162, 39, 0.16);
     padding: 5px 12px;
     border-radius: 999px;
-}
-
-
-/* ---------- compact mode (napr. skola.html) ----------
-   Cieľ: aby sa celá stránka po odomknutí zmestila na výšku
-   bežnej FullHD (1920×1080) obrazovky bez rolovania. */
-
-body.compact .site-nav .wrap {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-body.compact .page-hero {
-    padding-top: clamp(16px, 3vw, 28px);
-    padding-bottom: clamp(8px, 1.5vw, 14px);
-}
-
-body.compact .page-hero h1 {
-    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
-    margin-bottom: 0.2em;
-}
-
-body.compact .page-hero .eyebrow-label {
-    margin-bottom: 2px;
-}
-
-body.compact .page-hero p {
-    margin-bottom: 0;
-    font-size: 0.95rem;
-}
-
-body.compact section {
-    padding: 20px 0;
-}
-
-body.compact .section-head {
-    margin-bottom: 16px;
-}
-
-body.compact .card-grid {
-    gap: 14px;
-}
-
-body.compact .card-body {
-    padding: 14px 16px 16px;
-    gap: 6px;
-}
-
-body.compact .card-body h3 {
-    font-size: 1.1rem;
-}
-
-body.compact .card-body p {
-    font-size: 0.88rem;
-}
-
-body.compact .gate {
-    min-height: auto;
-    padding: 48px var(--edge);
-}
-
-body.compact #lockAgain {
-    margin: 4px auto 24px;
-}
-
-body.compact .site-footer {
-    padding: 20px 0 14px;
-    margin-top: 8px;
-}
-
-body.compact .site-footer h3 {
-    font-size: 0.92rem;
-    margin-bottom: 6px;
-}
-
-body.compact .footer-links {
-    gap: 3px;
-}
-
-body.compact .footer-bottom {
-    margin-top: 14px;
-    padding-top: 10px;
 }
 
 
@@ -723,11 +571,8 @@ a.card:hover {
 
 .dynamic-ticker-zone {
     background-color: rgba(234, 213, 183, 0.35);
-    /* Polopriehľadné pozadie, cez ktoré presvitá mesh gradient */
     backdrop-filter: blur(4px);
-    /* Jemné rozostrenie pre lepšiu čitateľnosť bežiaceho textu */
     border: 2px solid rgba(12, 49, 33, 0.15);
-    /* Jemnejší okraj zladený s paletou */
     border-radius: 8px;
     padding: 3px 0;
     margin: -10px 0 10px 0;
@@ -735,18 +580,13 @@ a.card:hover {
     width: 100%;
 }
 
-
-/* Riadok pásika */
-
 .ticker-row {
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
     padding: 2px 0;
-    /* Zmenšené vnútorné odsadenie riadkov */
     font-family: 'Calibri', Arial, sans-serif;
     font-size: 0.88rem;
-    /* Mierne kompaktnejšie písmo */
     color: #2b3a30;
     border-bottom: 1px dashed #e3decb;
 }
@@ -755,18 +595,12 @@ a.card:hover {
     border-bottom: none;
 }
 
-
-/* Posuvný obsah (animácia zľava doprava) */
-
 .ticker-content {
     display: inline-block;
     padding-left: 100%;
     animation: marquee 20s linear infinite;
     font-weight: 600;
 }
-
-
-/* Definícia animácie posunu */
 
 @keyframes marquee {
     0% {
@@ -793,7 +627,8 @@ a.card:hover {
 
 .o-mne-obrazok-box {
     flex: 0.8;
-    min-height: 340px;
+    min-height: 260px;
+    width: 100%;
     background-color: transparent;
     border-radius: 16px;
     display: flex;
@@ -810,19 +645,6 @@ a.card:hover {
     display: block;
 }
 
-.placeholder-text {
-    color: var(--paper);
-    font-style: italic;
-    text-align: center;
-    padding: 1.5rem;
-    opacity: 0.85;
-}
-
-.o-mne-obrazok-box {
-    width: 100%;
-    min-height: 260px;
-}
-
 .o-mne-text p {
     text-align: justify;
     hyphens: auto;
@@ -830,24 +652,89 @@ a.card:hover {
     margin-bottom: 1rem;
 }
 
-@keyframes sustredenaEnergia {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
+
+/* =========================================================
+   RESPONZIVITA (Media Queries)
+   ========================================================= */
+
+@media (max-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
+@media (max-width: 860px) {
+    .hero .wrap {
+        grid-template-columns: 1fr;
+    }
+}
 
-/* Responzivita pre mobilné zariadenia */
+@media (min-width: 760px) {
+    .timeline::before {
+        left: 50%;
+        transform: translateX(-1px);
+    }
+    .milestone {
+        width: calc(50% - 44px);
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .milestone::before {
+        transform: translateX(-50%);
+    }
+    .milestone:nth-child(odd) {
+        margin-left: 0;
+        text-align: right;
+        padding-right: 40px;
+    }
+    .milestone:nth-child(odd)::before {
+        left: calc(100% + 44px);
+    }
+    .milestone:nth-child(even) {
+        margin-left: calc(50% + 44px);
+        padding-left: 40px;
+    }
+    .milestone:nth-child(even)::before {
+        left: -44px;
+    }
+}
 
 @media (max-width: 768px) {
     .section-head.o-mne-grid {
         flex-direction: column;
         gap: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+    .nav-links {
+        position: fixed;
+        inset: 62px 0 auto 0;
+        flex-direction: column;
+        background: var(--paper);
+        padding: 8px var(--edge) 20px;
+        border-bottom: 1px solid rgba(27, 67, 50, 0.12);
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .nav-links.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    .nav-toggle {
+        display: block;
+        background: none;
+        border: 1px solid var(--forest);
+        border-radius: 6px;
+        width: 38px;
+        height: 34px;
+        color: var(--forest);
+        font-size: 1.1rem;
     }
 }
