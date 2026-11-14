@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moja cesta — Ing. Gabriel Stromp</title>
     <link rel="stylesheet" href="css/style1.css">
+
 </head>
 
 <body>
@@ -101,12 +102,18 @@
                 <p>Osobný portál a prezentačný web.</p>
             </div>
             <div>
-                <h3>Navigácia</h3>
+                <h3>Stránky</h3>
                 <ul class="footer-links">
                     <li><a href="index.html">Domov</a></li>
                     <li><a href="aktivity.html">Aktivity</a></li>
                     <li><a href="zivot.html">Môj život</a></li>
                     <li><a href="skola.html">Škola</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Kontakt</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="openContactModal">info@strompgabriel.sk</a></li>
                 </ul>
             </div>
         </div>
@@ -115,7 +122,41 @@
         </div>
     </footer>
 
+    <!-- MODÁLNE OKNO PRE KONTAKT -->
+    <div id="contactModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">Napíšte mi správu</h3>
+            <p class="modal-subtitle">Odkazová schránka — odpoveď vám pošlem na váš e-mail.</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="modal-form">
+                <!-- Váš kľúč z Web3Forms  ,  4b1dcbdf-44ea-448e-bc24-60aca16b67b5 -->
+                <input type="hidden" name="access_key" value="4b1dcbdf-44ea-448e-bc24-60aca16b67b5">
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="form-group">
+                    <label for="senderEmail">Váš e-mail</label>
+                    <input type="email" id="senderEmail" name="email" required placeholder="vas@email.sk">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgSubject">Predmet</label>
+                    <input type="text" id="msgSubject" name="subject" required placeholder="O čom mi píšete?">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgText">Vaša správa</label>
+                    <textarea id="msgText" name="message" rows="4" required placeholder="Text vašej správy..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelContactModal" class="btn-cancel">Cancel</button>
+                    <button type="submit" class="btn-submit">Odoslať správu</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="js/main.js"></script>
+
 </body>
 
 </html>
