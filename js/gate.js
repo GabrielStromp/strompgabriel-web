@@ -21,56 +21,56 @@ var PASSWORD_HASH = "dc445ede81f6c0ee052f2a1a148b5da7d415aaefec225cfb43d49df59c6
 var STORAGE_KEY = "skola-unlocked";
 
 async function sha256Hex(text) {
-  var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-  return Array.from(new Uint8Array(buf))
-    .map(function (b) { return b.toString(16).padStart(2, "0"); })
-    .join("");
+    var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf))
+        .map(function(b) { return b.toString(16).padStart(2, "0"); })
+        .join("");
 }
 
 function showProtectedContent() {
-  document.getElementById("gate-wrapper").classList.add("hidden");
-  document.getElementById("protectedContent").classList.add("visible");
+    document.getElementById("gate-wrapper").classList.add("hidden");
+    document.getElementById("protectedContent").classList.add("visible");
 }
 
 function showGate() {
-  document.getElementById("gate-wrapper").classList.remove("hidden");
-  document.getElementById("protectedContent").classList.remove("visible");
+    document.getElementById("gate-wrapper").classList.remove("hidden");
+    document.getElementById("protectedContent").classList.remove("visible");
 }
 
 // Ak už bolo heslo v tejto relácii overené, odomkni rovno.
 if (sessionStorage.getItem(STORAGE_KEY) === "yes") {
-  showProtectedContent();
+    showProtectedContent();
 }
 
 var form = document.getElementById("gateForm");
 var errorEl = document.getElementById("gateError");
 
 if (form) {
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
 
-    if (!window.crypto || !window.crypto.subtle) {
-      errorEl.textContent = "Overenie hesla funguje len cez HTTPS (napr. priamo na strompgabriel.sk).";
-      return;
-    }
+        if (!window.crypto || !window.crypto.subtle) {
+            errorEl.textContent = "Overenie hesla funguje len cez HTTPS (napr. priamo na strompgabriel.sk).";
+            return;
+        }
 
-    var value = document.getElementById("gatePassword").value;
-    var hash = await sha256Hex(value);
+        var value = document.getElementById("gatePassword").value;
+        var hash = await sha256Hex(value);
 
-    if (hash === PASSWORD_HASH) {
-      sessionStorage.setItem(STORAGE_KEY, "yes");
-      errorEl.textContent = "";
-      showProtectedContent();
-    } else {
-      errorEl.textContent = "Nesprávne heslo, skús to znova.";
-    }
-  });
+        if (hash === PASSWORD_HASH) {
+            sessionStorage.setItem(STORAGE_KEY, "yes");
+            errorEl.textContent = "";
+            showProtectedContent();
+        } else {
+            errorEl.textContent = "Nesprávne heslo, skús to znova.";
+        }
+    });
 }
 
 var lockBtn = document.getElementById("lockAgain");
 if (lockBtn) {
-  lockBtn.addEventListener("click", function () {
-    sessionStorage.removeItem(STORAGE_KEY);
-    showGate();
-  });
+    lockBtn.addEventListener("click", function() {
+        sessionStorage.removeItem(STORAGE_KEY);
+        showGate();
+    });
 }
