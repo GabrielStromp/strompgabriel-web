@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Presná mapa všetkých 33 slajdov a 17 videí  //    
     const slides = [
-        { type: 'image', src: baseImgPath + 'Snímka1.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka2.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka3.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka4.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka5.jpg' },
+        { type: 'image', src: baseImgPath + 'Snímka1.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka2.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka3.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka4.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka5.JPG' },
         { type: 'image', src: baseImgPath + 'Snímka6.jpg' },
         { type: 'image', src: baseImgPath + 'Snímka7.jpg' },
         { type: 'image', src: baseImgPath + 'Snímka8.jpg' },
