@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
             sources: [baseVidPath + 'media3.mp4', baseVidPath + 'media4.mp4'],
             cssStyle: 'position: absolute; top: 29%; left: 3.5%; width: 93%; height: 63%; display: grid; grid-template-columns: 1fr 1fr; gap: 4%;'
         }, // Snímka 22
-        { type: 'image', src: baseImgPath + 'Snímka23.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka23.JPG' }, // Snímka 23
         {
             type: 'mixed-grid',
             img: baseImgPath + 'Snímka24.JPG',
             sources: [baseVidPath + 'media5.mp4', baseVidPath + 'media6.mp4', baseVidPath + 'media7.mp4'],
-            cssStyle: 'position: absolute; top: 0.1%; left: 0.1%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5%;'
+            cssStyle: 'position: absolute; top: 0.1%; left: 0.1%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1%;'
         }, // Snímka 24
         {
             type: 'mixed',
