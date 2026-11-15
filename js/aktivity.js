@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: 'image', src: baseImgPath + 'Snímka3.JPG' },
         { type: 'image', src: baseImgPath + 'Snímka4.JPG' },
         { type: 'image', src: baseImgPath + 'Snímka5.JPG' },
-        { type: 'image', src: baseImgPath + 'Snímka6.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka7.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka8.jpg' },
-        { type: 'mixed', img: baseImgPath + 'Snímka9.jpg', video: baseVidPath + 'media1.mp4', cssStyle: 'position: absolute; top: 12%; left: 33%; width: 63%; height: 75%;' }, // Snímka 9
+        { type: 'image', src: baseImgPath + 'Snímka6.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka7.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka8.JPG' },
+        { type: 'mixed', img: baseImgPath + 'Snímka9.JPG', video: baseVidPath + 'media1.mp4', cssStyle: 'position: absolute; top: 12%; left: 33%; width: 63%; height: 75%;' }, // Snímka 9
         {
             type: 'animated-image',
-            src: baseImgPath + 'Snímka10.jpg',
+            src: baseImgPath + 'Snímka10.JPG',
             dots: [
                 { top: '41%', left: '16%', size: '24px', color: '#f39893', glow: '0 0 18px 8px rgba(255, 59, 48, 0.9)' }, // Ľavé svetlo pod strechou
                 { top: '29%', left: '78.5%', size: '12px', color: '#f77f9b', glow: '0 0 14px 6px rgba(239, 171, 98, 0.9)' }, // Pravá dióda na kamere  2x
@@ -27,32 +27,32 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         }, //    Snímka 10 (animácia)
         { type: 'videos', sources: [baseVidPath + 'media2.mp4'] }, // Snímka 11
-        { type: 'image', src: baseImgPath + 'Snímka12.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka13.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka14.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka15.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka16.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka17.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka18.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka19.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka20.jpg' },
-        { type: 'image', src: baseImgPath + 'Snímka21.jpg' },
+        { type: 'image', src: baseImgPath + 'Snímka12.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka13.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka14.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka15.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka16.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka17.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka18.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka19.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka20.JPG' },
+        { type: 'image', src: baseImgPath + 'Snímka21.JPG' },
         {
             type: 'mixed-grid',
-            img: baseImgPath + 'Snímka22.jpg',
+            img: baseImgPath + 'Snímka22.JPG',
             sources: [baseVidPath + 'media3.mp4', baseVidPath + 'media4.mp4'],
             cssStyle: 'position: absolute; top: 29%; left: 3.5%; width: 93%; height: 63%; display: grid; grid-template-columns: 1fr 1fr; gap: 4%;'
         }, // Snímka 22
-        { type: 'image', src: baseImgPath + 'Snímka23.jpg' },
+        { type: 'image', src: baseImgPath + 'Snímka23.JPG' },
         {
             type: 'mixed-grid',
-            img: baseImgPath + 'Snímka24.jpg',
+            img: baseImgPath + 'Snímka24.JPG',
             sources: [baseVidPath + 'media5.mp4', baseVidPath + 'media6.mp4', baseVidPath + 'media7.mp4'],
             cssStyle: 'position: absolute; top: 0.1%; left: 0.1%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5%;'
         }, // Snímka 24
         {
             type: 'mixed',
-            img: baseImgPath + 'Snímka25.jpg',
+            img: baseImgPath + 'Snímka25.JPG',
             video: baseVidPath + 'media8.mp4',
             cssStyle: 'position: absolute; top: 20%; left: 4%; width: 99%; height: 80%;'
         }, // Snímka 25
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cssStyle: 'position: absolute; top: 0.2%; left: 0.5%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.2%;'
         }, // Snímka 31
         { type: 'videos', sources: [baseVidPath + 'media17.mp4'] }, // Snímka 32
-        { type: 'image', src: baseImgPath + 'Snímka33.jpg' }
+        { type: 'image', src: baseImgPath + 'Snímka33.JPG' }
     ];
 
     let currentIndex = 0;
