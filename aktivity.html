@@ -7,6 +7,205 @@
     <title>Aktivity — Gabriel Stromp</title>
     <meta name="description" content="Prehľad aktivít, projektov a záľub Gabriela Stromp.">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Modálne okno prezentácie */
+        
+        .pres-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10, 15, 25, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .pres-modal.is-open {
+            display: flex;
+        }
+        
+        .pres-container {
+            position: relative;
+            width: 100%;
+            max-width: 1140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pres-stage {
+            width: 100%;
+            background: #111827;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+        }
+        /* Hlavná plocha slajdu – pevný pomer 16:9 alebo max výška podľa obrazovky */
+        
+        .pres-content {
+            width: 100%;
+            height: 75vh;
+            max-height: 680px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        /* Statický obrázok */
+        
+        .pres-content img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        /* Rozloženie videí (1, 2 alebo 3 vedľa seba bez prekrývania) */
+        
+        .pres-video-grid {
+            display: grid;
+            gap: 1rem;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-items: center;
+        }
+        
+        .pres-video-grid.cols-1 {
+            grid-template-columns: 1fr;
+        }
+        
+        .pres-video-grid.cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .pres-video-grid.cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .pres-video-grid video {
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            background: #050505;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        /* Spodná lišta */
+        
+        .pres-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.65rem 1.25rem;
+            background: #1f2937;
+            color: #e5e7eb;
+            font-size: 0.9rem;
+        }
+        
+        .pres-counter {
+            font-weight: 600;
+            color: #38bdf8;
+        }
+        /* Ovládacie tlačidlá (Zavrieť a Šípky) */
+        
+        .pres-close {
+            position: absolute;
+            top: -42px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0 0.5rem;
+            transition: color 0.2s;
+        }
+        
+        .pres-close:hover {
+            color: #38bdf8;
+        }
+        
+        .pres-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(31, 41, 55, 0.85);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+        
+        .pres-nav:hover {
+            background: #0284c7;
+            transform: translateY(-50%) scale(1.08);
+        }
+        
+        .pres-prev {
+            left: -22px;
+        }
+        
+        .pres-next {
+            right: -22px;
+        }
+        /* Responzivita pre menšie displeje */
+        
+        @media (max-width: 768px) {
+            .pres-content {
+                height: 65vh;
+            }
+            .pres-video-grid.cols-2,
+            .pres-video-grid.cols-3 {
+                grid-template-columns: 1fr;
+                overflow-y: auto;
+            }
+            .pres-prev {
+                left: 6px;
+            }
+            .pres-next {
+                right: 6px;
+            }
+        }
+        
+        @keyframes pulseBeacon {
+            0%,
+            100% {
+                opacity: 0.15;
+                transform: translate(-50%, -50%) scale(0.85);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.25);
+            }
+        }
+        
+        .beacon-dot {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulseBeacon 1.2s infinite ease-in-out;
+        }
+    </style>
 </head>
 
 <body>
@@ -200,7 +399,8 @@
                         <h3>Lanové dráhy a bezpečnosť</h3>
                         <p>Odborné zameranie na lanové dráhy, vleky a systémy verejnej dopravy. Implementácia bezpečnostných programov a riešení v spolupráci s <a href="https://www.sunkidworld.com/en/" target="_blank" rel="noopener">Sunkid World</a> s dôrazom
                             na prísne normy a spoľahlivosť.</p>
-                        <a class="card-link" href="#">Viac info ↗</a>
+
+                        <a class="card-link" href="#" id="openLanovkyPresentation">Viac info ↗</a>
                     </div>
                 </div>
             </div>
@@ -266,6 +466,28 @@
             </form>
         </div>
     </div>
+
+    <!-- Modálne okno pre interaktívnu prezentáciu Sunkid / Bluecime AI -->
+    <div class="pres-modal" id="presentationModal" aria-hidden="true">
+        <div class="pres-container">
+            <button class="pres-close" id="closePresModal" aria-label="Zavrieť prezentáciu">&times;</button>
+            <button class="pres-nav pres-prev" id="prevSlide" aria-label="Predchádzajúci slajd">&#10094;</button>
+
+            <div class="pres-stage">
+                <!-- Kontajner pre dynamický obsah (obrázok alebo mriežka videí) -->
+                <div class="pres-content" id="presContent"></div>
+
+                <!-- Spodná lišta s počítadlom a názvom -->
+                <div class="pres-footer">
+                    <span id="presCaption">Sunkid / Bluecime AI – Bezpečnosť lanových dráh</span>
+                    <span class="pres-counter" id="presCounter">1 / 33</span>
+                </div>
+            </div>
+
+            <button class="pres-nav pres-next" id="nextSlide" aria-label="Ďalší slajd">&#10095;</button>
+        </div>
+    </div>
+    <script src="js/aktivity.js"></script>
 </body>
 
 </html>
