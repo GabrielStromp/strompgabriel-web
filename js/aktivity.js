@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             video: baseVidPath + 'media11.mp4',
             cssStyle: 'position: absolute; top: 16%; left: 4%; width: 92%; height: 78%;'
         }, // Snímka 27
-        { type: 'image', src: baseImgPath + 'Snímka28.jpg' },
+        { type: 'image', src: baseImgPath + 'Snímka28.JPG' }, // Snímka28
         {
             type: 'mixed-grid',
             img: baseImgPath + 'Snímka29.JPG',
