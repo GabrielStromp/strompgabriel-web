@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gabriel Stromp</title>
+    <meta name="description" content="Gabriel Stromp személyes oldala — tevékenységek, életút és projektek.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <nav class="site-nav">
+        <div class="wrap">
+            <a href="index.html" class="brand">Gabriel&nbsp;Stromp</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menü megnyitása" aria-expanded="false">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" aria-current="page">Kezdőlap</a></li>
+                <li><a href="aktivity.html">Tevékenységek</a></li>
+                <li><a href="../zivot.html">Életem</a></li> <!-- Prípadne /hu/zivot.html ak bude preložené -->
+                <li><a href="../skola.html">Iskola</a></li>
+                <!-- Nyelvi választó a jobb oldalon -->
+                <li class="nav-lang-switcher">
+                    <a href="../index.html" class="lang-link" title="Slovensky">SK</a>
+                    <span class="lang-divider">/</span>
+                    <a href="../en/index.html" class="lang-link" title="English">EN</a>
+                    <span class="lang-divider">/</span>
+                    <a href="index.html" class="lang-link active" title="Magyar">HU</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <header class="hero">
+        <div class="wrap">
+            <div>
+                <p class="eyebrow-label"></p>
+                <h1>Üdvözlöm az oldalamon</h1>
+                <div class="hero-actions">
+                    <a href="aktivity.html" class="btn btn-primary">Tevékenységeim megtekintése</a>
+                    <a href="../zivot.html" class="btn btn-ghost">Életutam</a>
+                </div>
+            </div>
+            <div class="hero-photo portrait-morph">
+                <img src="../images/ImagePhoto1.jpg" alt="Gabriel Stromp" class="img-base">
+                <img src="../images/Ja2026-11karikatura1.jpg" alt="Gabriel Stromp - portré" class="img-hover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Dinamikus sáv / ticker -->
+    <section class="dynamic-ticker-zone">
+        <!-- 1. Sor: Hőmérséklet és visszaszámlálás -->
+        <div class="ticker-row">
+            <div class="ticker-content" id="row-temp">
+                :::: <span id="temp-value">Betöltés...</span> °C | következő: <span id="countdown">15:00</span> :::: </div>
+        </div>
+
+        <!-- 2. Sor -->
+        <div class="ticker-row">
+            <div class="ticker-content">
+                Aktív rendszer — Üdvözöljük a SG projekt környezetében
+            </div>
+        </div>
+
+        <!-- 3. Sor: Visszaszámlálás Szilveszterig -->
+        <div class="ticker-row">
+            <div class="ticker-content">
+                Aktuális állapot: Minden modul hibátlanul működik | <span id="silvester-countdown">Idő betöltése...</span> |
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule">
+
+    <section id="o-mne">
+        <div class="wrap">
+
+            <div class="section-head o-mne-grid">
+                <div class="o-mne-text">Rólam</h3>
+                    <p>Kassán tevékenykedem a technika, az oktatás és a becsületes kétkezi munka határán. A gépészmérnöki diploma (TUKE) és több mint húsz év ipari információs építészként eltöltött gyakorlat után – ahol adatbázisokat, adattárházakat és gyártósori folyamatirányítási rendszereket terveztem – ma alkalmazott informatikát, programozást, robotikát és webes technológiákat tanítok. Célom, hogy a diákoknak gyakorlati gondolkodásmódot adjak át, és megmutassam nekik, hogyan működnek a dolgok a felszín alatt.</p>
+                    <p>Ugyanezt az alapelveken nyugvó szemléletet alkalmazom az iskolán kívül is, legyen szó borászatról, gazdálkodásról vagy aktív sportról – az állóképességi futástól, a túrázástól és a sportlövészettől egészen a verseny-téliúszásig. Hiszek az önellátásban, a tényeken alapuló megközelítésben és az értelmes munkában, amely után kézzelfogható eredmény marad.</p>
+                </div>
+                <div class="o-mne-obrazok-box">
+                    <div class="o-mne-obrazok-box">
+                        <img src="../images/ImagePhoto2.jpg" alt="Gabriel Stromp" style="width: 90%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="zaujmy.html"> <!-- Prípadne /hu/zaujmy.html -->
+                    <div class="card-body">
+                        <p class="card-tag">Érdeklődési kör</p>
+                        <h3>Mik a hobbiaim</h3>
+                        <p>Programozás, sport, zene és egyéb tevékenységek, amelyekkel foglalkozom.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="hodnoty.html">
+                    <div class="card-body">
+                        <p class="card-tag">Értékek</p>
+                        <h3>Mi a fontos számomra</h3>
+                        <p>Új dolgok tanulása, csapatmunka, felelősségvállalás.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="kontakt.html">
+                    <div class="card-body">
+                        <p class="card-tag">Kapcsolat</p>
+                        <h3>Lépjünk kapcsolatba</h3>
+                        <p>E-mail és a profiljaim egy helyen.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule">
+
+    <section id="odkazy">
+        <div class="wrap">
+            <div class="section-head">
+                <div>
+                    <h2>Itt is megtalálhatsz</h2>
+                    <p>Közösségi hálók, profilok és projektek egy helyen.</p>
+                </div>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="https://github.com/" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profil</p>
+                        <h3>GitHub</h3>
+                        <p>Projektjeim és kódjaim.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profil</p>
+                        <h3>LinkedIn</h3>
+                        <p>Szakmai önéletrajz és tapasztalatok.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="https://www.instagram.com/" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profil</p>
+                        <h3>Instagram</h3>
+                        <p>Fotók és a hétköznapi élet.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="https://www.facebook.com/gabriel.kosice" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profil</p>
+                        <h3>Facebook</h3>
+                        <p>FB</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <h3>Gabriel Stromp</h3>
+                <p style="color:rgba(202,210,197,0.75); font-size:0.9rem; max-width:32ch;">
+                    strompgabriel.sk
+                </p>
+            </div>
+            <div>
+                <h3>Oldalak</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Kezdőlap</a></li>
+                    <li><a href="aktivity.html">Tevékenységek</a></li>
+                    <li><a href="../zivot.html">Életem</a></li>
+                    <li><a href="../skola.html">Iskola</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Kapcsolat</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="openContactModal">info@strompgabriel.sk</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-bottom">© <span id="year"></span> Gabriel Stromp. Minden jog fenntartva.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+
+    <script>
+        let totalSeconds = 15 * 60;
+
+        function updateCountdown() {
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+
+            let formattedTime =
+                String(minutes).padStart(2, '0') + ":" +
+                String(seconds).padStart(2, '0');
+
+            document.getElementById('countdown').innerText = formattedTime;
+
+            if (totalSeconds > 0) {
+                totalSeconds--;
+            } else {
+                totalSeconds = 15 * 60;
+                fetchNewTemperature();
+            }
+        }
+
+        function fetchNewTemperature() {
+            fetch('https://api.npoint.io/9538b1b10b05ddd51c6a')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.teplota && data.cas) {
+                        let sformatovanyCas = data.cas.replace(" ", "T");
+                        let casPoslednehoMerania = new Date(sformatovanyCas);
+                        let teraz = new Date();
+
+                        if (isNaN(casPoslednehoMerania)) {
+                            document.getElementById('temp-value').innerText = data.teplota;
+                            return;
+                        }
+
+                        let rozdielMinut = (teraz - casPoslednehoMerania) / (1000 * 60);
+
+                        if (rozdielMinut > 30) {
+                            document.getElementById('temp-value').innerText = "nem mért";
+                        } else {
+                            let intervalMeraniaMinut = 15;
+                            let ubehloSekund = Math.floor((teraz - casPoslednehoMerania) / 1000);
+                            let celkovoSekundLimit = intervalMeraniaMinut * 60;
+                            let zbyvaSekund = celkovoSekundLimit - ubehloSekund;
+
+                            let infoText = "";
+                            if (zbyvaSekund > 0) {
+                                let min = Math.floor(zbyvaSekund / 60);
+                                let sek = zbyvaSekund % 60;
+                                infoText = `${data.teplota} °C (köv. ${min}p ${sek < 10 ? '0' : ''}${sek}mp)`;
+                            } else {
+                                infoText = `${data.teplota} °C (frissítés...)`;
+                            }
+
+                            document.getElementById('temp-value').innerText = infoText;
+                        }
+                    } else {
+                        document.getElementById('temp-value').innerText = "nem mért";
+                    }
+                })
+                .catch(error => {
+                    console.log('Hiba a hőmérséklet lekérdezésekor:', error);
+                    document.getElementById('temp-value').innerText = "nem mért";
+                });
+        }
+        setInterval(updateCountdown, 1000);
+        fetchNewTemperature();
+
+        function spustitOdpocitavanieNaSilvestra() {
+            const cielovyCas = new Date("2026-12-31T23:59:59").getTime();
+
+            function aktualizujCas() {
+                const teraz = new Date().getTime();
+                const zostavaCasu = cielovyCas - teraz;
+
+                if (zostavaCasu > 0) {
+                    const dni = Math.floor(zostavaCasu / (1000 * 60 * 60 * 24));
+                    const hodiny = Math.floor((zostavaCasu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minuty = Math.floor((zostavaCasu % (1000 * 60 * 60)) / (1000 * 60));
+                    const sekundy = Math.floor((zostavaCasu % (1000 * 60)) / 1000);
+
+                    document.getElementById("silvester-countdown").innerText =
+                        `${dni} nap, ${hodiny} óra, ${minuty} perc, ${sekundy < 10 ? '0' : ''}${sekundy} mp`;
+                } else {
+                    document.getElementById("silvester-countdown").innerText = "Boldog új évet!";
+                }
+            }
+
+            aktualizujCas();
+            setInterval(aktualizujCas, 1000);
+        }
+
+        spustitOdpocitavanieNaSilvestra();
+    </script>
+    <!-- MODÁLIS ABLAK - KAPCSOLAT -->
+    <div id="contactModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">Küldjön nekem üzenetet</h3>
+            <p class="modal-subtitle">Postafiók — a választ az e-mail címére küldöm.</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="modal-form">
+                <input type="hidden" name="access_key" value="4b1dcbdf-44ea-448e-bc24-60aca16b67b5">
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="form-group">
+                    <label for="senderEmail">Az Ön e-mail címe</label>
+                    <input type="email" id="senderEmail" name="email" required placeholder="az.on@email.hu">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgSubject">Tárgy</label>
+                    <input type="text" id="msgSubject" name="subject" required placeholder="Miről szól az üzenet?">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgText">Az Ön üzenete</label>
+                    <textarea id="msgText" name="message" rows="4" required placeholder="Üzenet szövege..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelContactModal" class="btn-cancel">Mégse</button>
+                    <button type="submit" class="btn-submit">Üzenet küldése</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tevékenységek — Gabriel Stromp</title>
+    <meta name="description" content="Gabriel Stromp tevékenységeinek, projektjeinek és hobbiinak áttekintése.">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Modális ablak stílusai */
+        .pres-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10, 15, 25, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .pres-modal.is-open {
+            display: flex;
+        }
+        .pres-container {
+            position: relative;
+            width: 100%;
+            max-width: 1140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pres-stage {
+            width: 100%;
+            background: #111827;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+        }
+        .pres-content {
+            width: 100%;
+            height: 75vh;
+            max-height: 680px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .pres-content img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .pres-video-grid {
+            display: grid;
+            gap: 1rem;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-items: center;
+        }
+        .pres-video-grid.cols-1 { grid-template-columns: 1fr; }
+        .pres-video-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .pres-video-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .pres-video-grid video {
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            background: #050505;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .pres-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.65rem 1.25rem;
+            background: #1f2937;
+            color: #e5e7eb;
+            font-size: 0.9rem;
+        }
+        .pres-counter {
+            font-weight: 600;
+            color: #38bdf8;
+        }
+        .pres-close {
+            position: absolute;
+            top: -42px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0 0.5rem;
+            transition: color 0.2s;
+        }
+        .pres-close:hover { color: #38bdf8; }
+        .pres-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(31, 41, 55, 0.85);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .pres-nav:hover {
+            background: #0284c7;
+            transform: translateY(-50%) scale(1.08);
+        }
+        .pres-prev { left: -22px; }
+        .pres-next { right: -22px; }
+        @media (max-width: 768px) {
+            .pres-content { height: 65vh; }
+            .pres-video-grid.cols-2,
+            .pres-video-grid.cols-3 {
+                grid-template-columns: 1fr;
+                overflow-y: auto;
+            }
+            .pres-prev { left: 6px; }
+            .pres-next { right: 6px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="site-nav">
+        <div class="wrap">
+            <a href="index.html" class="brand">Gabriel&nbsp;Stromp</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menü megnyitása" aria-expanded="false">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Kezdőlap</a></li>
+                <li><a href="aktivity.html" aria-current="page">Tevékenységek</a></li>
+                <li><a href="../zivot.html">Életem</a></li>
+                <li><a href="../skola.html">Iskola</a></li>
+                <!-- Nyelvi választó a jobb oldalon -->
+                <li class="nav-lang-switcher">
+                    <a href="../aktivity.html" class="lang-link" title="Slovensky">SK</a>
+                    <span class="lang-divider">/</span>
+                    <a href="../en/aktivity.html" class="lang-link" title="English">EN</a>
+                    <span class="lang-divider">/</span>
+                    <a href="aktivity.html" class="lang-link active" title="Magyar">HU</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="eyebrow-label">Mit csinálok</p>
+            <h1>Tevékenységeim</h1>
+            <p>
+                Projektjeim, szakköreim, versenyeim és egyéb tevékenységeim áttekintése a mindennapokon túl — a sporttól és a kerti munkától egészen az IT-ig és a programozásig.
+            </p>
+        </div>
+    </header>
+
+    <section>
+        <div class="wrap">
+
+            <!-- Kollázs -->
+            <div class="card" style="margin-bottom:2.5rem;">
+                <div class="card-img">
+                    <img src="../images/Kolazaktivity.JPG" alt="Tevékenységek kollázsa — úszás, síelés, alpesi túra, kenózás, rajzolás, informatika, bor és kert">
+                </div>
+                <div class="card-body">
+                    <p class="card-tag">Kollázs</p>
+                    <h3>Minden egy helyen</h3>
+                    <p>
+                        Úszás, síelés, alpesi sízés, kenózás, rajzolás, informatika, bor és kert — rövid vizuális áttekintés arról, mivel foglalkozom.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-grid">
+
+                <!-- IT / Informatika -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>IT és informatika</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">IT</p>
+                        <h3>Informatika és programozás</h3>
+                        <p>
+                            Már az általános iskola óta foglalkozom informatikával — az algoritmusok alapjaitól a weboldalak készítésén át a kisebb projektekig. Szeretek logikai feladatokat megoldani, új technológiákat tanulni és összepárosítani őket a környezetemben lévő valós dolgokkal. Érdekel az informatika és az adatelemzés is.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Programozás AI-val -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Programozás AI-val</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">IT / AI</p>
+                        <h3>Programozás mesterséges intelligenciával</h3>
+                        <p>
+                            Próbálom kihasználni az AI eszközöket a programozásban — a kódgenerálástól a hibák magyarázatán át a megoldások tervezéséig. Tanulom, hogyan használjam az AI-t hatékony segítőként, miközben értem is, mit csinál a kód.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Úszás -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Úszás</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Sport</p>
+                        <h3>Úszás</h3>
+                        <p>
+                            Az úszás az egyik kedvenc sportom. Rendszeresenűzöm — fejlesztem a technikát, az állóképességet és a kondíciót. Számomra ez a kikapcsolódás és a feltöltődés formája az iskola mellett.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Kenózás -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Kenózás</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Sport</p>
+                        <h3>Kenózás</h3>
+                        <p>
+                            A kenózás megtanított a türelemre, az egyensúlyra és a csapatmunkára. Vízi sportok megadják a szabadság érzését, miközben tanítanak a természet és a körülmények tiszteletére.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Skialping -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Alpesi túrasí és síelés</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Sport / Hegyek</p>
+                        <h3>Alpesi túrasí és síelés</h3>
+                        <p>
+                            Szeretem a téli tevékenységeket — a pályán való síelést és a túrasít a hegyekben. A skialp számomra a mozgás, a kilátás és a saját határaink átlépésének kombinációja. A hegyi környezet biztonságáról is tanulok. Aktív mozgás a téli természetben, alpesi sízés és túrák. Saját sporttevékenységeim mellett síoktatóként is tevékenykedem iskolák — alap- és középiskolások — számára, nagy hangsúlyt fektetve a biztonságra és a helyes technikára.</p>
+                    </div>
+                    <a class="card-link" href="#">Több info ↗</a>
+                </div>
+
+                <!-- Kerékpározás -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Kerékpározás</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Sport</p>
+                        <h3>Kerékpározás</h3>
+                        <p>
+                            A szabadidőmet a lehető leggyakrabban biciklizéssel töltöm — akár rövid környékbeli túrákkal, akár hosszabb távokkal. A kerékpározás segít megőrizni a kondíciómat és új helyeket felfedezni.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Borászat -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Szőlészet és kert</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Hobbi / Munka</p>
+                        <h3>Szőlészet és kert</h3>
+                        <p>
+                            A szőlőben és a kertben végzett munka türelemre és felelősségre tanít — a telepítéstől és a metszéstől kezdve a növényápoláson át a szüretig. Ez a természettel való kapcsolat és valami, ami kézzelfogható eredményeket hoz.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Oktatási tevékenység -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Oktatási tevékenység</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Oktatás</p>
+                        <h3>Oktatási tevékenység</h3>
+                        <p>
+                            Szívesen tanulok új dolgokat, és adom át a tudásomat másoknak — akár az osztálytársaknak segítve, akár az általam ismert témák elmagyarázásával. Élvezem annak a módját keresni, hogyan lehet a dolgokat érthetően és érdekesen bemutatni.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Rajzolás -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Rajzolás</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Művészet</p>
+                        <h3>Rajzolás</h3>
+                        <p>
+                            A rajzolás számomra a kifejezés és a kikapcsolódás eszköze. Rendszertelenül foglalkozom vele, de mindig élvezem — a vázlatoktól a részletesebb rajzokig. Fejleszti a képzelőerőt és a részletek iránti érzéket.
+                        </p>
+                        <a class="card-link" href="#">Több info ↗</a>
+                    </div>
+                </div>
+
+                <!-- Lanovky a bezpečnost -->
+                <div class="card">
+                    <div class="card-img">
+                        <span>Felvonók és biztonság</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-tag">Közösségi közlekedés</p>
+                        <h3>Felvonók és biztonság</h3>
+                        <p>Szakmai fókusz a felvonókra, libegőkre és a tömegközlekedési rendszerekre. Biztonsági megoldások és szabványok tanácsadása és implementálása a
+                            <a href="https://www.sunkidworld.com/en/" target="_blank" rel="noopener">Sunkid World</a> és <a href="https://www.leitner.com/en/" target="_blank" rel="noopener">Leitner</a> technológiákhoz, beleértve a fejlett biztonsági és AI elemző rendszerek integrációját a
+                            <a href="https://www.bluecime.com/" target="_blank" rel="noopener">Bluecime</a> cégtől. </p>
+                        <a class="card-link" href="#" id="openLanovkyPresentation">Több info ↗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <h3>Gabriel Stromp</h3>
+                <p style="color:rgba(202,210,197,0.75); font-size:0.9rem;">strompgabriel.sk</p>
+            </div>
+            <div>
+                <h3>Oldalak</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Kezdőlap</a></li>
+                    <li><a href="aktivity.html">Tevékenységek</a></li>
+                    <li><a href="../zivot.html">Életem</a></li>
+                    <li><a href="../skola.html">Iskola</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Kapcsolat</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="openContactModal">info@strompgabriel.sk</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-bottom">© <span id="year"></span> Gabriel Stromp. Minden jog fenntartva.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    
+    <!-- MODÁLIS ABLAK - KAPCSOLAT -->
+    <div id="contactModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">Küldjön nekem üzenetet</h3>
+            <p class="modal-subtitle">Postafiók — a választ az e-mail címére küldöm.</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="modal-form">
+                <input type="hidden" name="access_key" value="4b1dcbdf-44ea-448e-bc24-60aca16b67b5">
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="form-group">
+                    <label for="senderEmail">Az Ön e-mail címe</label>
+                    <input type="email" id="senderEmail" name="email" required placeholder="az.on@email.hu">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgSubject">Tárgy</label>
+                    <input type="text" id="msgSubject" name="subject" required placeholder="Miről szól az üzenet?">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgText">Az Ön üzenete</label>
+                    <textarea id="msgText" name="message" rows="4" required placeholder="Üzenet szövege..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelContactModal" class="btn-cancel">Mégse</button>
+                    <button type="submit" class="btn-submit">Üzenet küldése</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modális ablak a Sunkid / Bluecime AI interaktív prezentációhoz -->
+    <div class="pres-modal" id="presentationModal" aria-hidden="true">
+        <div class="pres-container">
+            <button class="pres-close" id="closePresModal" aria-label="Prezentáció bezárása">&times;</button>
+            <button class="pres-nav pres-prev" id="prevSlide" aria-label="Előző diák">&#10094;</button>
+
+            <div class="pres-stage">
+                <div class="pres-content" id="presContent"></div>
+
+                <div class="pres-footer">
+                    <span id="presCaption">Sunkid / Bluecime AI – Felvonók biztonsága</span>
+                    <span class="pres-counter" id="presCounter">1 / 33</span>
+                </div>
+            </div>
+
+            <button class="pres-nav pres-next" id="nextSlide" aria-label="Következő diák">&#10095;</button>
+        </div>
+    </div>
+    <script src="../js/aktivity.js"></script>
+</body>
+
+</html>

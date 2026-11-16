@@ -707,13 +707,6 @@ a.card:hover {
     }
 }
 
-@media (max-width: 768px) {
-    .section-head.o-mne-grid {
-        flex-direction: column;
-        gap: 2rem;
-    }
-}
-
 @media (max-width: 640px) {
     .card-grid {
         grid-template-columns: 1fr;
@@ -915,4 +908,54 @@ a.card:hover {
     /* Po nabehnutí sa rozostrenie stratí, ale ostane čisto biele pozadie */
     filter: blur(0px) contrast(1.18) brightness(1.06);
     transform: scale(1);
+}
+
+
+/* Štýl pre prepínač jazykov na pravej strane navigácie */
+
+.nav-links .nav-lang-switcher {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    /* Jemný odstup od poslednej položky menu */
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nav-links .lang-link {
+    padding: 4px 6px;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.nav-links .lang-link:hover,
+.nav-links .lang-link.active {
+    opacity: 1;
+    color: var(--accent-color, #2b6cb0);
+    /* Prispôsobí sa tvojej akcentovej farbe, alebo si doplň svoju */
+    font-weight: 600;
+}
+
+.nav-links .lang-divider {
+    opacity: 0.4;
+    user-select: none;
+    margin: 0 2px;
+}
+
+
+/* Pre responzívne zobrazenie na mobilných zariadeniach (keď sa menu zbalí) */
+
+@media (max-width: 768px) {
+    .nav-links .nav-lang-switcher {
+        justify-content: center;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .section-head.o-mne-grid {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
