@@ -58,7 +58,7 @@
         <!-- 3. Riadok: Voľný / Pripravený na ďalšie dáta -->
         <div class="ticker-row">
             <div class="ticker-content">
-                Aktuálny stav: Všetky moduly fungujú bezchybne
+                Aktuálny stav: Všetky moduly fungujú bezchybne | <span id="silvester-countdown">Načítavam čas...</span> |
             </div>
         </div>
     </section>
@@ -267,17 +267,41 @@
                     document.getElementById('temp-value').innerText = "nemerané";
                 });
         }
-
-
-
-
-
-
         // Spustenie odpočtu každú 1 sekundu
         setInterval(updateCountdown, 1000);
-
         // Počiatočné načítanie hodnoty pri štarte
         fetchNewTemperature();
+
+        function spustitOdpocitavanieNaSilvestra() {
+            // Definícia cieľového času: 31. december 2026, 23:59:59
+            const cielovyCas = new Date("2026-12-31T23:59:59").getTime();
+
+            function aktualizujCas() {
+                const teraz = new Date().getTime();
+                const zostavaCasu = cielovyCas - teraz;
+
+                if (zostavaCasu > 0) {
+                    // Výpočet dní, hodín, minút a sekúnd
+                    const dni = Math.floor(zostavaCasu / (1000 * 60 * 60 * 24));
+                    const hodiny = Math.floor((zostavaCasu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minuty = Math.floor((zostavaCasu % (1000 * 60 * 60)) / (1000 * 60));
+                    const sekundy = Math.floor((zostavaCasu % (1000 * 60)) / 1000);
+
+                    // Formátovaný výpis do tvojho elementu
+                    document.getElementById("silvester-countdown").innerText =
+                        `${dni} dní, ${hodiny} hod., ${minuty} min., ${sekundy < 10 ? '0' : ''}${sekundy} sek.`;
+                } else {
+                    document.getElementById("silvester-countdown").innerText = "Šťastný nový rok!";
+                }
+            }
+
+            // Spustiť okamžite pri načítaní (alebo po refreshi) a potom aktualizovať každú sekundu
+            aktualizujCas();
+            setInterval(aktualizujCas, 1000);
+        }
+
+        // Spustenie funkcie
+        spustitOdpocitavanieNaSilvestra();
     </script>
     <!-- MODÁLNE OKNO PRE KONTAKT -->
     <div id="contactModal" class="modal-overlay" aria-hidden="true">
