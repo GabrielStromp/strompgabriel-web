@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             type: 'mixed-grid',
             img: baseImgPath + 'Snímka24.JPG',
-            sources: [baseVidPath + 'media5.mp4', baseVidPath + 'media6.mp4', baseVidPath + 'media7.mp4'],
+            sources: [baseVidPath + 'media5.mp4', baseVidPath + 'media6.mp4'], //, baseVidPath + 'media7.mp4'
             cssStyle: 'position: absolute; top: 0.1%; left: 0.1%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1%;'
         }, // Snímka 24
         {
