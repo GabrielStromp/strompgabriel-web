@@ -2,6 +2,7 @@
 <html lang="sk">
 
 <head>
+    <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gabriel Stromp</title>
@@ -10,7 +11,6 @@
 </head>
 
 <body>
-
     <nav class="site-nav">
         <div class="wrap">
             <a href="index.html" class="brand">Gabriel&nbsp;Stromp</a>
@@ -23,13 +23,11 @@
             </ul>
         </div>
     </nav>
-
     <header class="hero">
         <div class="wrap">
             <div>
                 <p class="eyebrow-label"></p>
                 <h1>Vitajte na mojej stránke </h1>
-
                 <div class="hero-actions">
                     <a href="aktivity.html" class="btn btn-primary">Pozri moje aktivity</a>
                     <a href="zivot.html" class="btn btn-ghost">Moja cesta</a>
@@ -224,18 +222,41 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data && data.teplota && data.cas) {
-                        let casPoslednehoMerania = new Date(data.cas);
+                        // Bezpečný prevod: nahradíme medzeru za 'T', aby tomu rozumel každý prehliadač
+                        let sformatovanyCas = data.cas.replace(" ", "T");
+                        let casPoslednehoMerania = new Date(sformatovanyCas);
                         let teraz = new Date();
 
-                        // Vypočítame rozdiel v minutách medzi aktuálnym časom a posledným meraním
+                        // Kontrola, či dátum je platný
+                        if (isNaN(casPoslednehoMerania)) {
+                            document.getElementById('temp-value').innerText = data.teplota;
+                            return;
+                        }
+
+                        // Vypočítame rozdiel v minútach (pridaná hviezdička *)
                         let rozdielMinut = (teraz - casPoslednehoMerania) / (1000 * 60);
 
-                        // Ak je posledné meranie staršie ako 30 minút (notebook je napr. vypnutý)
+                        // Ak je posledné meranie staršie ako 30 minút
                         if (rozdielMinut > 30) {
                             document.getElementById('temp-value').innerText = "nemerané";
                         } else {
-                            // Ak je notebook zapnutý a dáta sú čerstvé
-                            document.getElementById('temp-value').innerText = data.teplota;
+                            // 15-minútový cyklus odpočítavania do ďalšieho merania
+                            let intervalMeraniaMinut = 15;
+                            let ubehloSekund = Math.floor((teraz - casPoslednehoMerania) / 1000);
+                            let celkovoSekundLimit = intervalMeraniaMinut * 60;
+                            let zbyvaSekund = celkovoSekundLimit - ubehloSekund;
+
+                            let infoText = "";
+                            if (zbyvaSekund > 0) {
+                                let min = Math.floor(zbyvaSekund / 60);
+                                let sek = zbyvaSekund % 60;
+                                // Tu sa zobrazí teplota + živé odpočítavanie, ktoré sa po refreshi nezmaže, ale naskočí presne tam, kde má byť
+                                infoText = `${data.teplota} °C (ďalšie o ${min}m ${sek < 10 ? '0' : ''}${sek}s)`;
+                            } else {
+                                infoText = `${data.teplota} °C (aktualizuje sa...)`;
+                            }
+
+                            document.getElementById('temp-value').innerText = infoText;
                         }
                     } else {
                         document.getElementById('temp-value').innerText = "nemerané";
@@ -246,6 +267,11 @@
                     document.getElementById('temp-value').innerText = "nemerané";
                 });
         }
+
+
+
+
+
 
         // Spustenie odpočtu každú 1 sekundu
         setInterval(updateCountdown, 1000);
