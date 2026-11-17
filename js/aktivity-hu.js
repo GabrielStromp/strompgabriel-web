@@ -49,19 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'mixed-grid',
             img: baseImgPath + 'Snímka24.JPG',
             sources: [baseVidPath + 'media5.mp4', baseVidPath + 'media6.mp4', baseVidPath + 'media7.mp4'],
-            cssStyle: 'position: absolute; top: 0.1%; left: 0.1%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1%;'
+            cssStyle: 'position: absolute; top: 22%; left: 0.1%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1%;'
         }, // 24. dia
         {
             type: 'mixed',
             img: baseImgPath + 'Snímka25.JPG',
             video: baseVidPath + 'media8.mp4',
-            cssStyle: 'position: absolute; top: 20%; left: 4%; width: 99%; height: 80%;'
+            cssStyle: 'position: absolute; top: 18%; left: 1%; width: 99%; height: 80%;'
         }, // 25. dia
         {
             type: 'mixed-grid',
             img: baseImgPath + 'Snímka26.JPG',
             sources: [baseVidPath + 'media9.mp4', baseVidPath + 'media10.mp4'],
-            cssStyle: 'position: absolute; top: 0.5%; left: 0.5%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2%;'
+            cssStyle: 'position: absolute; top: 15%; left: 0.5%; width: 100%; height: 92%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2%;'
         }, // 26. dia
         {
             type: 'mixed',
@@ -80,13 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'mixed',
             img: baseImgPath + 'Snímka30.JPG',
             video: baseVidPath + 'media14.mp4',
-            cssStyle: 'position: absolute; top: 15%; left: 0.3%; width: 99%; height: 80%;'
+            cssStyle: 'position: absolute; top: 18%; left: 0.3%; width: 99%; height: 80%;'
         }, // 30. dia
         {
             type: 'mixed-grid',
             img: baseImgPath + 'Snímka31.JPG',
             sources: [baseVidPath + 'media15.mp4', baseVidPath + 'media16.mp4'],
-            cssStyle: 'position: absolute; top: 0.2%; left: 0.5%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.2%;'
+            cssStyle: 'position: absolute; top: 15%; left: 0.5%; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.2%;'
         }, // 31. dia
         { type: 'videos', sources: [baseVidPath + 'media17.mp4'] }, // 32. dia
         { type: 'image', src: baseImgPath + 'Snímka33.JPG' } // 33. dia
