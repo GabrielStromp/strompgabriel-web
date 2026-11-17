@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 video.autoplay = true;
                 video.loop = true;
                 video.playsInline = true;
+                video.preload = 'auto'; // Zabezpečí načítanie dát
                 grid.appendChild(video);
             });
 
@@ -155,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             video.autoplay = true;
             video.loop = true;
             video.playsInline = true;
+            video.preload = 'auto'; // Zabezpečí načítanie dát
             video.style.cssText = slide.cssStyle + '; object-fit: fill;';
 
             wrapper.appendChild(img);
@@ -202,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 video.autoplay = true;
                 video.loop = true;
                 video.playsInline = true;
+                video.preload = 'auto'; // Zabezpečí načítanie dát
                 video.style.cssText = 'width: 100%; height: 100%; object-cover: cover; border-radius: 4px;';
                 grid.appendChild(video);
             });
