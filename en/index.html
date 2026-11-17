@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gabriel Stromp</title>
+    <meta name="description" content="Personal website of Gabriel Stromp — activities, life journey, and projects.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <nav class="site-nav">
+        <div class="wrap">
+            <a href="index.html" class="brand">Gabriel&nbsp;Stromp</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="aktivity.html">Activities</a></li>
+                <li><a href="zivot.html">My Life</a></li>
+                <li><a href="skola.html">School</a></li>
+                <!-- Language switcher positioned on the right with visual separation -->
+                <li class="nav-lang-switcher">
+                    <a href="../index.html" class="lang-link" title="Slovensky">SK</a>
+                    <span class="lang-divider">/</span>
+                    <a href="index.html" class="lang-link active" title="English">EN</a>
+                    <span class="lang-divider">/</span>
+                    <a href="../hu/index.html" class="lang-link" title="Magyar">HU</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <header class="hero">
+        <div class="wrap">
+            <div>
+                <p class="eyebrow-label"></p>
+                <h1>Welcome to my website</h1>
+                <div class="hero-actions">
+                    <a href="aktivity.html" class="btn btn-primary">Explore my activities</a>
+                    <a href="zivot.html" class="btn btn-ghost">My journey</a>
+                </div>
+            </div>
+            <div class="hero-photo portrait-morph">
+                <img src="../images/ImagePhoto1.jpg" alt="Gabriel Stromp" class="img-base">
+                <img src="../images/Ja2026-11karikatura1.jpg" alt="Gabriel Stromp - portrait" class="img-hover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Dynamic ticker section -->
+    <section class="dynamic-ticker-zone">
+        <!-- Row 1: Temperature and countdown -->
+        <div class="ticker-row">
+            <div class="ticker-content" id="row-temp">
+                :::: <span id="temp-value">Loading...</span> °C | in: <span id="countdown">15:00</span> :::: </div>
+        </div>
+
+        <!-- Row 2: System status -->
+        <div class="ticker-row">
+            <div class="ticker-content">
+                System active — Welcome to the SG project environment
+            </div>
+        </div>
+
+        <!-- Row 3: Countdown to New Year's Eve -->
+        <div class="ticker-row">
+            <div class="ticker-content">
+                Current status: All modules operating smoothly | <span id="silvester-countdown">Loading time...</span> |
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule">
+
+    <section id="o-mne">
+        <div class="wrap">
+
+            <div class="section-head o-mne-grid">
+                <div class="o-mne-text">
+                    <h3>About Me</h3>
+                    <p>I am based in Košice, working at the intersection of engineering, education, and honest hands-on craftsmanship. Following my mechanical engineering studies at TUKE and over twenty years of experience as an industrial information architect – where I designed databases, data warehouses, and process control systems for manufacturing lines – I now teach applied computer science, programming, robotics, and web technologies. My goal is to pass on practical thinking to students and show them how things truly work beneath the surface.</p>
+                    <p>I apply the same ground-up approach outside of school as well, whether in winemaking, farming, or active sports – from endurance running, hiking, and marksmanship to competitive winter swimming. I believe in self-reliance, practicality, and meaningful work that leaves behind tangible results.</p>
+                </div>
+                <div class="o-mne-obrazok-box">
+                    <div class="o-mne-obrazok-box">
+                        <img src="../images/ImagePhoto2.jpg" alt="Gabriel Stromp" style="width: 90%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="zaujmy.html">
+                    <div class="card-body">
+                        <p class="card-tag">Interests</p>
+                        <h3>What I Enjoy</h3>
+                        <p>Programming, sports, music, and other pursuits I dedicate my time to.</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="hodnoty.html">
+                    <div class="card-body">
+                        <p class="card-tag">Values</p>
+                        <h3>What Matters to Me</h3>
+                        <p>Continuous learning, teamwork, and responsibility.</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="kontakt.html">
+                    <div class="card-body">
+                        <p class="card-tag">Contact</p>
+                        <h3>Get in Touch</h3>
+                        <p>Email and links to my profiles all in one place.</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule">
+
+    <section id="odkazy">
+        <div class="wrap">
+            <div class="section-head">
+                <div>
+                    <h2>Find Me Here Too</h2>
+                    <p>Social networks, profiles, and projects in one place.</p>
+                </div>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="https://github.com/" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profile</p>
+                        <h3>GitHub</h3>
+                        <p>My projects and code.</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profile</p>
+                        <h3>LinkedIn</h3>
+                        <p>Professional resume and experience.</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="https://www.instagram.com/" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profile</p>
+                        <h3>Instagram</h3>
+                        <p>Photos and everyday life.</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+                <a class="card" href="https://www.facebook.com/gabriel.kosice" target="_blank" rel="noopener">
+                    <div class="card-body">
+                        <p class="card-tag">Profile</p>
+                        <h3>Facebook</h3>
+                        <p>FB</p>
+                        <span class="card-link">Open ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <h3>Gabriel Stromp</h3>
+                <p style="color:rgba(202,210,197,0.75); font-size:0.9rem; max-width:32ch;">
+                    strompgabriel.sk
+                </p>
+            </div>
+            <div>
+                <h3>Pages</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aktivity.html">Activities</a></li>
+                    <li><a href="zivot.html">My Life</a></li>
+                    <li><a href="skola.html">School</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="openContactModal">info@strompgabriel.sk</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-bottom">© <span id="year"></span> Gabriel Stromp. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+
+    <script>
+        let totalSeconds = 15 * 60; // 15 minutes in seconds for temperature refresh
+
+        function updateCountdown() {
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+
+            let formattedTime =
+                String(minutes).padStart(2, '0') + ":" +
+                String(seconds).padStart(2, '0');
+
+            document.getElementById('countdown').innerText = formattedTime;
+
+            if (totalSeconds > 0) {
+                totalSeconds--;
+            } else {
+                totalSeconds = 15 * 60;
+                fetchNewTemperature();
+            }
+        }
+
+        function fetchNewTemperature() {
+            fetch('https://api.npoint.io/9538b1b10b05ddd51c6a')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.teplota && data.cas) {
+                        let sformatovanyCas = data.cas.replace(" ", "T");
+                        let casPoslednehoMerania = new Date(sformatovanyCas);
+                        let teraz = new Date();
+
+                        if (isNaN(casPoslednehoMerania)) {
+                            document.getElementById('temp-value').innerText = data.teplota;
+                            return;
+                        }
+
+                        let rozdielMinut = (teraz - casPoslednehoMerania) / (1000 * 60);
+
+                        if (rozdielMinut > 30) {
+                            document.getElementById('temp-value').innerText = "not measured";
+                        } else {
+                            let intervalMeraniaMinut = 15;
+                            let ubehloSekund = Math.floor((teraz - casPoslednehoMerania) / 1000);
+                            let celkovoSekundLimit = intervalMeraniaMinut * 60;
+                            let zbyvaSekund = celkovoSekundLimit - ubehloSekund;
+
+                            let infoText = "";
+                            if (zbyvaSekund > 0) {
+                                let min = Math.floor(zbyvaSekund / 60);
+                                let sek = zbyvaSekund % 60;
+                                infoText = `${data.teplota} °C (next in ${min}m ${sek < 10 ? '0' : ''}${sek}s)`;
+                            } else {
+                                infoText = `${data.teplota} °C (updating...)`;
+                            }
+
+                            document.getElementById('temp-value').innerText = infoText;
+                        }
+                    } else {
+                        document.getElementById('temp-value').innerText = "not measured";
+                    }
+                })
+                .catch(error => {
+                    console.log('Temperature connection error:', error);
+                    document.getElementById('temp-value').innerText = "not measured";
+                });
+        }
+        setInterval(updateCountdown, 1000);
+        fetchNewTemperature();
+
+        function spustitOdpocitavanieNaSilvestra() {
+            const cielovyCas = new Date("2026-12-31T23:59:59").getTime();
+
+            function aktualizujCas() {
+                const teraz = new Date().getTime();
+                const zostavaCasu = cielovyCas - teraz;
+
+                if (zostavaCasu > 0) {
+                    const dni = Math.floor(zostavaCasu / (1000 * 60 * 60 * 24));
+                    const hodiny = Math.floor((zostavaCasu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minuty = Math.floor((zostavaCasu % (1000 * 60 * 60)) / (1000 * 60));
+                    const sekundy = Math.floor((zostavaCasu % (1000 * 60)) / 1000);
+
+                    document.getElementById("silvester-countdown").innerText =
+                        `${dni} days, ${hodiny} hrs, ${minuty} min, ${sekundy < 10 ? '0' : ''}${sekundy} sec`;
+                } else {
+                    document.getElementById("silvester-countdown").innerText = "Happy New Year!";
+                }
+            }
+
+            aktualizujCas();
+            setInterval(aktualizujCas, 1000);
+        }
+
+        spustitOdpocitavanieNaSilvestra();
+    </script>
+    <!-- CONTACT MODAL WINDOW -->
+    <div id="contactModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">Send Me a Message</h3>
+            <p class="modal-subtitle">Message box — I will send my reply to your email.</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="modal-form">
+                <input type="hidden" name="access_key" value="4b1dcbdf-44ea-448e-bc24-60aca16b67b5">
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="form-group">
+                    <label for="senderEmail">Your email</label>
+                    <input type="email" id="senderEmail" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgSubject">Subject</label>
+                    <input type="text" id="msgSubject" name="subject" required placeholder="What are you writing about?">
+                </div>
+
+                <div class="form-group">
+                    <label for="msgText">Your message</label>
+                    <textarea id="msgText" name="message" rows="4" required placeholder="Write your message here..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelContactModal" class="btn-cancel">Cancel</button>
+                    <button type="submit" class="btn-submit">Send message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
