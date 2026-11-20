@@ -3,6 +3,43 @@
    Farby, typografia a spoločné komponenty pre celý web.
    ========================================================= */
 
+.aktivity-page {
+    margin: 0;
+    padding: 0;
+    /* Začína priamo pod dolným rámom hlavičky */
+}
+
+
+/* Rám je bez farebného ohraničenia / transparentný */
+
+.video-outer-frame {
+    max-width: 1200px;
+    /* Pre celú šírku obrazovky daj 100% */
+    margin: 0 auto;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    overflow: hidden;
+}
+
+
+/* Samotné video bez rámu a bez ohraničenia */
+
+.aktivity-bg-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    object-fit: cover;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
 :root {
     --forest: #1B4332;
