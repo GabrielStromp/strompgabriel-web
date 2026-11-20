@@ -127,6 +127,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     padding-top: 18px;
     padding-bottom: 18px;
 }
@@ -141,6 +142,7 @@ section {
 
 .nav-links {
     display: flex;
+    align-items: center;
     gap: clamp(16px, 3vw, 34px);
     list-style: none;
     margin: 0;
@@ -148,6 +150,7 @@ section {
 }
 
 .nav-links a {
+    display: inline-block;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
@@ -161,6 +164,61 @@ section {
 .nav-links a[aria-current="page"] {
     color: var(--forest);
     border-color: var(--gold);
+}
+
+
+/* Rovnaký štýl prepínača SK / EN / HU ako v style.css */
+
+.nav-lang-switcher,
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: var(--sans);
+    flex-shrink: 0;
+}
+
+.nav-lang-switcher a,
+.lang-switch a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    opacity: 0.75;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-lang-switcher a:hover,
+.nav-lang-switcher a[aria-current="page"],
+.nav-lang-switcher a.active,
+.lang-switch a:hover,
+.lang-switch a[aria-current="page"],
+.lang-switch a.active {
+    opacity: 1;
+    color: var(--accent-color, #2b6cb0);
+    font-weight: 600;
+    border-bottom-color: var(--gold);
+    background: transparent;
+}
+
+.nav-lang-switcher .lang-divider,
+.lang-switch span {
+    opacity: 0.45;
+    user-select: none;
+    margin: 0 2px;
+}
+
+@media (max-width: 768px) {
+    .nav-lang-switcher,
+    .lang-switch {
+        margin-left: 8px;
+        font-size: 0.85rem;
+    }
 }
 
 .nav-toggle {
@@ -192,8 +250,8 @@ section {
 
 .timeline {
     position: relative;
-    margin-top: 10px;
-    padding: 10px 0;
+    margin-top: 0;
+    padding: 4px 0;
 }
 
 
@@ -212,7 +270,7 @@ section {
 .milestone {
     position: relative;
     padding-left: 56px;
-    margin-bottom: 40px;
+    margin-bottom: 26px;
     background: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(27, 67, 50, 0.1);
     border-radius: 14px;
@@ -337,11 +395,11 @@ section {
     }
     .milestone {
         width: calc(50% - 44px) !important;
-        padding: 24px 28px !important;
-        margin-bottom: 48px !important;
+        padding: 20px 24px !important;
+        margin-bottom: 24px !important;
     }
     .milestone::before {
-        top: 28px !important;
+        top: 24px !important;
     }
     /* Nepárne míľniky vľavo */
     .milestone:nth-child(odd) {
@@ -354,10 +412,15 @@ section {
     /* Párne míľniky vpravo */
     .milestone:nth-child(even) {
         margin-left: calc(50% + 44px) !important;
+        margin-top: 26px !important;
         text-align: left !important;
     }
     .milestone:nth-child(even)::before {
         left: -44px !important;
+    }
+    /* Prvý míľnik štartuje vyššie */
+    .milestone:first-child {
+        margin-top: -10px !important;
     }
 }
 
@@ -511,4 +574,38 @@ section {
 .btn-cancel:hover {
     background: rgba(27, 67, 50, 0.08);
     color: var(--forest);
+}
+
+
+/* Kompaktný posun celej časovej osi o ~20 % vyššie pri zachovaní schodovitosti */
+
+.timeline-section-compact {
+    padding-top: 24px;
+}
+
+.timeline-section-compact .timeline {
+    margin-top: -16px;
+}
+
+
+/* Zmenšenie medzier medzi kartami o cca 20 % (bodky na osi ostanú presne zarovnané s kartami) */
+
+.timeline-section-compact .milestone {
+    margin-bottom: 24px;
+    /* Oproti bežným ~32–40px posunie celý zoznam o cca 20 % vyššie */
+}
+
+
+/* Zachovanie jasnej schodovitosti na desktope (pravé karty odsadené nižšie oproti ľavým) */
+
+@media (min-width: 769px) {
+    .timeline-section-compact .milestone:nth-child(even) {
+        margin-top: 48px;
+    }
+    .timeline-section-compact .milestone:nth-child(odd) {
+        margin-top: -24px;
+    }
+    .timeline-section-compact .milestone:first-child {
+        margin-top: 0;
+    }
 }

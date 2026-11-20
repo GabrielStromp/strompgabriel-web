@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moja cesta — Ing. Gabriel Stromp</title>
     <link rel="stylesheet" href="css/style1.css">
-    <!-- Jazykový prepínač v pravom hornom rohu -->
-
 
 </head>
 
@@ -15,16 +13,26 @@
 
     <!-- Navigácia -->
     <header class="site-nav">
-        <div class="wrap">
-            <a href="index.html" class="brand">Gabriel Stromp</a>
-            <button class="nav-toggle" aria-label="Menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html">Domov</a></li>
-                <li><a href="aktivity.html">Aktivity</a></li>
-                <li><a href="zivot.html" aria-current="page">Môj život</a></li>
-                <li><a href="skola.html">Škola</a></li>
-            </ul>
-        </div>
+        <nav class="site-nav">
+            <div class="wrap">
+                <a href="index.html" class="brand">Gabriel Stromp</a>
+                <button class="nav-toggle" aria-label="Menu">☰</button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Domov</a></li>
+                    <li><a href="aktivity.html">Aktivity</a></li>
+                    <li><a href="zivot.html" aria-current="page">Môj život</a></li>
+                    <li><a href="skola.html">Škola</a></li>
+                    <!-- Jazyková mutácia umiestnená na pravej strane s dizajnovým oddelením -->
+                    <li class="nav-lang-switcher">
+                        <a href="zivot.html" class="lang-link active" title="Slovensky">SK</a>
+                        <span class="lang-divider">/</span>
+                        <a href="en/zivot.html" class="lang-link" title="English">EN</a>
+                        <span class="lang-divider">/</span>
+                        <a href="hu/zivot.html" class="lang-link" title="Magyar">HU</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <!-- Hlavná sekcia (Hero) -->
@@ -37,11 +45,19 @@
     </section>
 
     <!-- Sekcia s časovou osou -->
-    <section>
+    <section class="timeline-section-compact">
         <div class="wrap">
             <div class="timeline">
 
-                <!-- Míľnik 1 -->
+                <!-- Míľnik 1: Stredná škola -->
+                <div class="milestone">
+                    <div class="milestone-year">1983 – 1987</div>
+                    <h3>SPŠ strojnícka s vyučovacím jazykom maďarským</h3>
+                    <p>Štúdium v odbore strojárstvo na Ždanovovej 1 v Košiciach, ukončené s vyznamenaním v období, keď sa maturovalo z piatich predmetov.</p>
+                    <span class="milestone-result">Maturita s vyznamenaním (5 predmetov)</span>
+                </div>
+
+                <!-- Míľnik 2: Vysoká škola -->
                 <div class="milestone">
                     <div class="milestone-year">1987 – 1992</div>
                     <h3>Technická univerzita v Košiciach (TUKE)</h3>
@@ -49,7 +65,15 @@
                     <span class="milestone-result">Titul Ing. & Pedagogické minimum</span>
                 </div>
 
-                <!-- Míľnik 2 -->
+                <!-- Míľnik 3: Vodičský kurz -->
+                <div class="milestone">
+                    <div class="milestone-year">1989</div>
+                    <h3>Vodičský kurz skupín A, B, C, T</h3>
+                    <p>Úspešné absolvovanie vodičského kurzu a získanie oprávnenia pre skupiny A, B, C a T, vydaného Dopravným inšpektorátom PZ OR Košice.</p>
+                    <span class="milestone-result">Vodičské oprávnenie A, B, C, T</span>
+                </div>
+
+                <!-- Míľnik 4: Prvé skúsenosti a IT -->
                 <div class="milestone">
                     <div class="milestone-year">1993 – 1996</div>
                     <h3>Prvé skúsenosti a oblasť IT</h3>
@@ -57,7 +81,15 @@
                     <span class="milestone-result">Prax v obchode a IT technológiách</span>
                 </div>
 
-                <!-- Míľnik 3 -->
+                <!-- Míľnik 5: Súdny znalec -->
+                <div class="milestone">
+                    <div class="milestone-year">1995 – 2004</div>
+                    <h3>Znalec v odbore strojárske konštrukcie</h3>
+                    <p>Absolvovanie špecializovaného štúdia na Ústave súdneho inžinierstva v Žiline. Oficiálny zápis v zozname znalcov na Ministerstve spravodlivosti SR so zameraním na hodnotenie strojov, strojárskych konštrukcií a zariadení.</p>
+                    <span class="milestone-result">Súdny znalec MS SR</span>
+                </div>
+
+                <!-- Míľnik 6: U.S. Steel Košice -->
                 <div class="milestone">
                     <div class="milestone-year">1997 – 2020</div>
                     <h3>Informačný architekt v U.S. Steel Košice</h3>
@@ -66,15 +98,7 @@
                     <span class="milestone-result">20+ rokov v priemyselnej informatike</span>
                 </div>
 
-                <!-- Míľnik 4 -->
-                <div class="milestone">
-                    <div class="milestone-year">1995 – 2004</div>
-                    <h3>Znalec v odbore strojárske konštrukcie</h3>
-                    <p>Absolvovanie špecializovaného štúdia na Ústave súdneho inžinierstva v Žiline. Oficiálny zápis v zozname znalcov na Ministerstve spravodlivosti SR so zameraním na hodnotenie strojov, strojárskych konštrukcií a zariadení.</p>
-                    <span class="milestone-result">Súdny znalec MS SR</span>
-                </div>
-
-                <!-- Míľnik 5 -->
+                <!-- Míľnik 7: Učiteľ a IKT koordinátor -->
                 <div class="milestone">
                     <div class="milestone-year">2021 – 2024</div>
                     <h3>Učiteľ informatiky a IKT koordinátor</h3>
@@ -83,7 +107,7 @@
                     <span class="milestone-result">Digitálna koordinačná prax & IT certifikáty</span>
                 </div>
 
-                <!-- Míľnik 6 -->
+                <!-- Míľnik 8: Súčasnosť -->
                 <div class="milestone">
                     <div class="milestone-year">2024 – Súčasnosť</div>
                     <h3>SSOŠ ekonomicko-technická, Košice</h3>
@@ -131,7 +155,6 @@
             <p class="modal-subtitle">Odkazová schránka — odpoveď vám pošlem na váš e-mail.</p>
 
             <form action="https://api.web3forms.com/submit" method="POST" class="modal-form">
-                <!-- Váš kľúč z Web3Forms  ,  4b1dcbdf-44ea-448e-bc24-60aca16b67b5 -->
                 <input type="hidden" name="access_key" value="4b1dcbdf-44ea-448e-bc24-60aca16b67b5">
                 <input type="checkbox" name="botcheck" style="display: none;">
 
