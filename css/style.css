@@ -350,6 +350,7 @@ hr.rule {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .card-img {
@@ -402,6 +403,8 @@ hr.rule {
     text-decoration: none;
     border-bottom: 1px solid var(--gold);
     align-self: flex-start;
+    padding-top: 8px;
+    margin-left: 0;
 }
 
 
