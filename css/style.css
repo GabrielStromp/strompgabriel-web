@@ -366,11 +366,15 @@ hr.rule {
     text-align: center;
     padding: 12px;
     overflow: hidden;
+    height: 90px;
+    width: 100%;
+    /* horizontálne zúženie cca o 30 % oproti 100 % šírky karty */
+    max-width: 90%;
 }
 
 .card-img img {
     width: 100%;
-    height: 100%;
+    height: 40%;
     object-fit: cover;
 }
 

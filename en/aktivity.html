@@ -219,15 +219,15 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="../en/index.html">Home</a></li>
                 <li><a href="../en/aktivity.html" aria-current="page">Activities</a></li>
-                <li><a href="zivot.html">My Life</a></li>
+                <li><a href="../en/zivot.html">My Life</a></li>
                 <li><a href="skola.html">School</a></li>
                 <!-- Language switcher positioned on the right with visual separation -->
                 <li class="nav-lang-switcher">
-                    <a href="../index.html" class="lang-link" title="Slovensky">SK</a>
+                    <a href="../aktivity.html" class="lang-link" title="Slovensky">SK</a>
                     <span class="lang-divider">/</span>
-                    <a href="../en/index.html" class="lang-link active" title="English">EN</a>
+                    <a href="../en/aktivity.html" class="lang-link active" title="English">EN</a>
                     <span class="lang-divider">/</span>
-                    <a href="../hu/index.html" class="lang-link" title="Magyar">HU</a>
+                    <a href="../hu/aktivity.html" class="lang-link" title="Magyar">HU</a>
                 </li>
             </ul>
         </div>
@@ -403,7 +403,9 @@
                                 and AI analytical systems by
                                 <a href="https://www.bluecime.com/" target="_blank" rel="noopener">Bluecime</a>.
                             </p>
-                            <a class="card-link" href="#" id="openLanovkyPresentation">More info ↗</a>
+                            <a class="card-link" href="#" id="openLanovkyPresentation">Bluecime presentation ↗</a>
+                            <!-- Nový odkaz pre Mountain Coaster -->
+                            <a class="card-link" href="#" id="openMountainCoasterModal">Mountain Coaster presentation &#8599;</a>
                         </div>
                     </div>
                 </div>
@@ -489,6 +491,29 @@
                 <button class="pres-nav pres-next" id="nextSlide" aria-label="Next slide">&#10095;</button>
             </div>
         </div>
+        <!-- Modálne okno pre interaktívnu prezentáciu Sunkid Mountain Coaster 2.0 -->
+        <div class="pres-modal" id="mcPresentationModal" aria-hidden="true">
+            <div class="pres-container">
+                <button class="pres-close" id="closeMcPresModal" aria-label="Zavrieť prezentáciu">&times;</button>
+                <button class="pres-nav pres-prev" id="prevMcSlide" aria-label="Predchádzajúci slajd">&#10094;</button>
+
+                <div class="pres-stage">
+                    <!-- Kontajner pre dynamický obsah (obrázok alebo video) -->
+                    <div class="pres-content" id="mcPresContent"></div>
+
+                    <!-- Spodná lišta s počítadlom a názvom -->
+                    <div class="pres-footer">
+                        <span id="mcPresCaption">Sunkid Mountain Coaster 2.0 – Celoročná horská bobová dráha</span>
+                        <div id="mcPresVideo" style="margin-top: 8px;"></div>
+                        <span class="pres-counter" id="mcPresCounter">1 / 58</span>
+                    </div>
+                </div>
+
+                <button class="pres-nav pres-next" id="nextMcSlide" aria-label="Ďalší slajd">&#10095;</button>
+            </div>
+        </div>
+
+        <script src="../js/aktivity2-en.js"></script>
         <script src="../js/aktivity-en.js"></script>
 </body>
 
