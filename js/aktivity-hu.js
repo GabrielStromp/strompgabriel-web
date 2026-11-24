@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'mixed',
             img: baseImgPath + 'Snímka27.JPG',
             video: baseVidPath + 'media11.mp4',
-            cssStyle: 'position: absolute; top: 16%; left: 4%; width: 92%; height: 78%;'
+            cssStyle: 'position: absolute; top: 19%; left: 3%; width: 95%; height: 70%;'
         }, // 27. dia
         { type: 'image', src: baseImgPath + 'Snímka28.JPG' }, // 28. dia
         {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'mixed',
             img: baseImgPath + 'Snímka30.JPG',
             video: baseVidPath + 'media14.mp4',
-            cssStyle: 'position: absolute; top: 18%; left: 0.3%; width: 99%; height: 80%;'
+            cssStyle: 'position: absolute; top: 23%; left: 0.3%; width: 99%; height: 78%;'
         }, // 30. dia
         {
             type: 'mixed-grid',
