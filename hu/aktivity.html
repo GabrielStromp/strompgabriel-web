@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tevékenységek — Gabriel Stromp</title>
-    <meta name="description" content="Gabriel Stromp tevékenységeinek, projektjeinek és hobbiinak áttekintése.">
+    <meta name="description" content="Gabriel Stromp tevékenységeinek, projektjeinek és hobbiainak áttekintése.">
 
     <link rel="stylesheet" href="../css/style.css">
     <style>
@@ -286,7 +286,7 @@
                             <p class="card-tag">Sport</p>
                             <h3>Úszás</h3>
                             <p>
-                                Az úszás az egyik kedvenc sportom. Rendszeresenűzöm — fejlesztem a technikát, az állóképességet és a kondíciót. Számomra ez a kikapcsolódás és a feltöltődés formája az iskola mellett.
+                                Az úszás az egyik kedvenc sportom. Rendszeresen űzöm — fejlesztem a technikát, az állóképességet és a kondíciót. Számomra ez a kikapcsolódás és a feltöltődés formája az iskola mellett.
                             </p>
                             <a class="card-link" href="#">Több info ↗</a>
                         </div>
@@ -482,6 +482,28 @@
                 </div>
 
                 <button class="pres-nav pres-next" id="nextSlide" aria-label="Következő diák">&#10095;</button>
+            </div>
+        </div>
+        <!-- Modálne okno pre interaktívnu prezentáciu Sunkid Mountain Coaster 2.0 -->
+        <div class="pres-modal" id="mcPresentationModal" aria-hidden="true">
+            <div class="pres-container">
+                <button class="pres-close" id="closeMcPresModal" aria-label="Prezentáció bezárása">&times;</button>
+                <button class="pres-nav pres-prev" id="prevMcSlide" aria-label="Előző dia">&#10094;</button>
+
+                <div class="pres-stage">
+                    <!-- Kontajner pre dynamický obsah (obrázok alebo video) -->
+                    <div class="pres-content" id="mcPresContent"></div>
+                    <div id="mcPresVideo" style="padding: 0.4rem 1.25rem; background: #111827; text-align: right;"></div>
+
+                    <!-- Spodná lišta s počítadlom a názvom -->
+                    <div class="pres-footer">
+                        <span id="mcPresCaption">Sunkid Mountain Coaster 2.0 – Celoročná horská bobová dráha</span>
+                        <div id="mcPresVideo" style="margin-top: 8px;"></div>
+                        <span class="pres-counter" id="mcPresCounter">1 / 57</span>
+                    </div>
+                </div>
+
+                <button class="pres-nav pres-next" id="nextMcSlide" aria-label="Következő dia">&#10095;</button>
             </div>
         </div>
         <script src="../js/aktivity-hu.js"></script>
