@@ -274,7 +274,6 @@
             const metaEl = document.getElementById("doorDrawerMetaHu");
             const filterEl = document.getElementById("doorFilterInputHu");
 
-            // Predpísané / odporúčané kľúčové slová pre rýchle doplnenie a filtrovanie
             const PRESET_KEYWORDS = [
                 "turizmus",
                 "vonzerő",
@@ -298,6 +297,33 @@
             let relevantItems = [];
             let selectedSource = "all";
             let loadedOnce = false;
+            let lastUpdatedLabel = "";
+            let totalRawCount = 0;
+
+            function showLoadingState() {
+                if (metaEl) {
+                    metaEl.textContent = "⏳ Pályázatok betöltése és szűrése...";
+                }
+                if (listEl) {
+                    listEl.innerHTML = `
+                <div style="display:flex; align-items:center; gap:10px; padding:14px 0; font-weight:500;">
+                    <span style="font-size:1.3rem;" aria-hidden="true">⏳</span>
+                    <span>Adatok betöltése a grants.json fájlból, kérem várjon...</span>
+                </div>
+            `;
+                }
+            }
+
+            function updateSourceButtonStyles() {
+                const bar = document.getElementById("doorSourceBarHu");
+                if (!bar) return;
+                bar.querySelectorAll("button[data-src]").forEach((btn) => {
+                    const isActive = btn.getAttribute("data-src") === selectedSource;
+                    btn.style.outline = isActive ? "2px solid #111827" : "none";
+                    btn.style.fontWeight = isActive ? "700" : "400";
+                    btn.style.background = isActive ? "#e5e7eb" : "";
+                });
+            }
 
             function scoreItem(row) {
                 const kwList = Array.isArray(row.keywords) ? row.keywords.map(k => String(k).toLowerCase()) : [];
@@ -316,7 +342,14 @@
 
             function applyKeywordToInput(keyword) {
                 if (!filterEl) return;
-                filterEl.value = keyword;
+                if (!keyword) {
+                    filterEl.value = "";
+                } else {
+                    const parts = filterEl.value.trim().split(/\s+/).filter(Boolean);
+                    const exists = parts.some(p => p.toLowerCase() === keyword.toLowerCase());
+                    if (!exists) parts.push(keyword);
+                    filterEl.value = parts.join(" ");
+                }
                 filterEl.dispatchEvent(new Event("input", {
                     bubbles: true
                 }));
@@ -326,22 +359,21 @@
             function ensureHelperBars() {
                 if (!filterEl) return;
 
-                // 1. Lišta s predpísanými kľúčovými slovami na automatické doplnenie do okna
                 if (!document.getElementById("doorPresetKeywordsBarHu")) {
                     const kwBar = document.createElement("div");
                     kwBar.id = "doorPresetKeywordsBarHu";
                     kwBar.style.cssText = "display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:8px;";
 
                     const label = document.createElement("span");
-                    label.textContent = "Kulcsszavak:";
-                    label.style.cssText = "font-size:0.82rem; font-weight:600; color:#374151; margin-right:2px;";
+                    label.textContent = "Kulcsszó hozzáadása:";
+                    label.style.cssText = "font-size:0.82rem; font-weight:600; color:#1f2937; margin-right:2px;";
                     kwBar.appendChild(label);
 
                     PRESET_KEYWORDS.forEach((kw) => {
                         const chip = document.createElement("button");
                         chip.type = "button";
                         chip.className = "btn-cancel";
-                        chip.textContent = kw;
+                        chip.textContent = "+ " + kw;
                         chip.style.cssText = "padding:4px 9px; font-size:0.8rem;";
                         chip.addEventListener("click", () => applyKeywordToInput(kw));
                         kwBar.appendChild(chip);
@@ -350,7 +382,7 @@
                     const clearBtn = document.createElement("button");
                     clearBtn.type = "button";
                     clearBtn.className = "btn-cancel";
-                    clearBtn.textContent = "Törlés (Mind)";
+                    clearBtn.textContent = "✕ Mező törlése";
                     clearBtn.style.cssText = "padding:4px 9px; font-size:0.8rem;";
                     clearBtn.addEventListener("click", () => applyKeywordToInput(""));
                     kwBar.appendChild(clearBtn);
@@ -358,13 +390,13 @@
                     filterEl.insertAdjacentElement("afterend", kwBar);
                 }
 
-                // 2. Lišta na filtrovanie podľa zdroja
                 const kwBarEl = document.getElementById("doorPresetKeywordsBarHu");
                 if (kwBarEl && !document.getElementById("doorSourceBarHu")) {
                     const srcBar = document.createElement("div");
                     srcBar.id = "doorSourceBarHu";
-                    srcBar.style.cssText = "display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;";
+                    srcBar.style.cssText = "display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:8px;";
                     srcBar.innerHTML = `
+                <span style="font-size:0.82rem; font-weight:600; color:#1f2937;">Forrás:</span>
                 <button type="button" class="btn-cancel" data-src="all">Mind (Releváns)</button>
                 <button type="button" class="btn-cancel" data-src="palyazatmenedzser.hu">palyazatmenedzser.hu</button>
                 <button type="button" class="btn-cancel" data-src="palyazat.gov.hu">palyazat.gov.hu</button>
@@ -375,28 +407,29 @@
                         const btn = ev.target.closest("button[data-src]");
                         if (!btn) return;
                         selectedSource = btn.getAttribute("data-src");
+                        updateSourceButtonStyles();
                         renderItems(filterEl.value);
                     });
-                }
-
-                // Predvyplnenie predpísaného kľúčového slova do vyhľadávacieho okna pri prvom otvorení
-                if (!filterEl.dataset.presetInitialized) {
-                    filterEl.dataset.presetInitialized = "1";
-                    filterEl.value = PRESET_KEYWORDS[0]; // predvolene "turizmus"
+                    updateSourceButtonStyles();
                 }
             }
 
             function renderItems(filterText = "") {
-                const q = filterText.trim().toLowerCase();
+                const terms = filterText.trim().toLowerCase().split(/\s+/).filter(Boolean);
                 const matches = relevantItems.filter((row) => {
                     const srcMatch = selectedSource === "all" || (row.source || "").toLowerCase().includes(selectedSource);
                     const text = `${row.source || ""} ${row.title || ""} ${(row._matchedKeywords || []).join(" ")}`.toLowerCase();
-                    const textMatch = !q || text.includes(q);
+                    const textMatch = terms.length === 0 || terms.every(t => text.includes(t));
                     return srcMatch && textMatch;
                 });
 
+                if (metaEl && loadedOnce) {
+                    const filterInfo = terms.length > 0 ? ` | Szűrő: "${terms.join(" ")}"` : " | Szűrő: nincs";
+                    metaEl.textContent = `Frissítve: ${lastUpdatedLabel} | Találat: ${matches.length} / ${relevantItems.length} releváns (összesen: ${totalRawCount})${filterInfo}`;
+                }
+
                 if (matches.length === 0) {
-                    listEl.innerHTML = "<p>A megadott szűrőknek jelenleg nincs megfelelő irányadó pályázat.</p>";
+                    listEl.innerHTML = "<p>A megadott szűrőknek jelenleg nincs megfelelő irányadó pályázat. Kattintson a <strong>✕ Mező törlése</strong> gombra az összes releváns találat megjelenítéséhez.</p>";
                     return;
                 }
 
@@ -408,7 +441,7 @@
                     const kws = (row._matchedKeywords || []).join(", ");
                     return `
                 <div style="padding: 10px 0; border-bottom: 1px solid #d1d5db;">
-                    <div style="font-size: 0.82rem; color: #374151;">
+                    <div style="font-size: 0.82rem; color: #1f2937;">
                         <strong>${row.source || "Forrás"}</strong>${row.date ? " • " + row.date : ""}${kws ? " • Kulcsszavak: " + kws : ""}
                     </div>
                     <div style="font-weight: 600; margin: 3px 0;">${row.title || "Névtelen tétel"}</div>
@@ -419,7 +452,7 @@
             }
 
             async function fetchGrantsJson() {
-                const paths = ["/data/grants.json", "../data/grants.json"];
+                const paths = ["/data/grants.json", "../data/grants.json", "/grants.json", "../grants.json"];
                 for (const p of paths) {
                     try {
                         const resp = await fetch(`${p}?t=${Date.now()}`);
@@ -437,11 +470,13 @@
                     renderItems(filterEl ? filterEl.value : "");
                     return;
                 }
-                loadedOnce = true;
 
+                showLoadingState();
                 try {
                     const data = await fetchGrantsJson();
                     const rawItems = Array.isArray(data.items) ? data.items : [];
+                    totalRawCount = rawItems.length;
+                    lastUpdatedLabel = data.updated_at || "nincs megadva";
 
                     relevantItems = rawItems
                         .map((row) => {
@@ -454,11 +489,11 @@
                         .filter((row) => row._score > 0)
                         .sort((a, b) => b._score - a._score);
 
-                    metaEl.textContent = `Frissítve: ${data.updated_at || "nincs megadva"} | Irányadó találatok: ${relevantItems.length} / ${rawItems.length}`;
+                    loadedOnce = true;
                     renderItems(filterEl ? filterEl.value : "");
                 } catch (e) {
-                    metaEl.textContent = "Még nincs betöltött adat (data/grants.json előkészítés alatt).";
-                    listEl.innerHTML = "<p>A szűrő készen áll – amint elérhető a data/grants.json, csak a releváns pályázatok jelennek meg.</p>";
+                    metaEl.textContent = "Még nincs betöltött adat (grants.json ellenőrzés alatt).";
+                    listEl.innerHTML = "<p>A szűrő készen áll – amint elérhető a grants.json, csak a releváns pályázatok jelennek meg.</p>";
                 }
             }
 
