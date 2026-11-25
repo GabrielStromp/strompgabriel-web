@@ -78,7 +78,8 @@
         <div class="wrap">
 
             <div class="section-head o-mne-grid">
-                <div class="o-mne-text">Rólam</h3>
+                <div class="o-mne-text">
+                    <h3>Rólam</h3>
                     <p>Kassán tevékenykedem a technika, az oktatás és a becsületes kétkezi munka határán. A gépészmérnöki diploma (TUKE) és több mint húsz év ipari információs építészként eltöltött gyakorlat után – ahol adatbázisokat, adattárházakat és gyártósori
                         folyamatirányítási rendszereket terveztem – ma alkalmazott informatikát, programozást, robotikát és webes technológiákat tanítok. Célom, hogy a diákoknak gyakorlati gondolkodásmódot adjak át, és megmutassam nekik, hogyan működnek
                         a dolgok a felszín alatt.</p>
@@ -120,6 +121,390 @@
             </div>
         </div>
     </section>
+
+    <hr class="rule">
+
+    <!-- Magyar feltételekre / pályázatokra szánt szakasz -->
+    <!-- Magyar feltételekre / pályázatokra szánt szakasz -->
+    <style>
+        /* "Ajtónyitás" effektus a böngésző teljes szélességében az elválasztó vonal helyén (0.5s) */
+        
+        .door-drawer-wrapper-hu {
+            width: 100%;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(-12deg);
+            transform-origin: top center;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .door-drawer-wrapper-hu.is-open {
+            max-height: 70vh;
+            opacity: 1;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        .door-drawer-inner-hu {
+            width: 100%;
+            height: 70vh;
+            max-height: 70vh;
+            box-sizing: border-box;
+            background: #ffffff;
+            border-top: 2px solid #9ca3af;
+            border-bottom: 2px solid #9ca3af;
+            padding: 20px clamp(16px, 4vw, 48px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 8px 18px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .door-drawer-header-hu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #d1d5db;
+        }
+        
+        .door-drawer-body-hu {
+            flex: 1;
+            overflow-y: auto;
+            padding-top: 12px;
+        }
+        
+        @keyframes subtleDoorAmbientHu {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .door-drawer-wrapper-hu.is-open .door-drawer-inner-hu {
+            background: linear-gradient(125deg, rgba(199, 211, 224, 0.98) 0%, rgba(110, 95, 240, 0.98) 45%, rgba(178, 196, 218, 0.98) 100%);
+            background-size: 220% 220%;
+            animation: subtleDoorAmbientHu 10s ease-in-out infinite;
+            border-top: 2px solid #9ca3af;
+            border-bottom: 2px solid #9ca3af;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .door-drawer-wrapper-hu.is-open .door-drawer-inner-hu {
+                animation: none;
+                background-position: 50% 50%;
+            }
+        }
+        /* Kompaktnejšia výška karty v maďarskej vyhradenej sekcii */
+        
+        #vyhradena-sekcia-hu .card {
+            min-height: 0;
+            height: auto;
+        }
+        
+        #vyhradena-sekcia-hu .card .card-body {
+            padding-top: 14px;
+            padding-bottom: 14px;
+        }
+        
+        #vyhradena-sekcia-hu .card h3 {
+            margin-top: 2px;
+            margin-bottom: 4px;
+            line-height: 1.25;
+        }
+        
+        #vyhradena-sekcia-hu .card p {
+            margin-top: 0;
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+    </style>
+
+    <section id="vyhradena-sekcia-hu">
+        <div class="wrap">
+            <div class="section-head">
+                <h3>Kijelölt szekció</h3>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="#panel-megnyitasa" id="toggleDoorPanelHu" role="button" aria-expanded="false" aria-controls="doorDrawerHu">
+                    <div class="card-body">
+                        <h3>Pályázatok és áttekintések</h3>
+                        <p>Hivatkozások az aktuális pályázatokra.</p>
+                        <span class="card-link">Megnyitás ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule" id="doorDividerRuleHu">
+
+    <!-- Lenýc panel teljes szélességben az elválasztó vonal helyén (0.5s) -->
+    <div id="doorDrawerHu" class="door-drawer-wrapper-hu" aria-hidden="true">
+        <div class="door-drawer-inner-hu" role="region" aria-label="Pályázati áttekintés">
+            <div class="door-drawer-header-hu">
+                <div>
+                    <h3 style="margin: 0;">Pályázati áttekintés (PályázatMenedzser.hu és további források)</h3>
+                    <small id="doorDrawerMetaHu" style="color: #4b5563;">Felkészítve a feldolgozott pályázatok betöltésére...</small>
+                </div>
+                <button type="button" id="closeDoorPanelHu" class="btn-cancel">Bezárás</button>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <input type="text" id="doorFilterInputHu" placeholder="Pályázatok szűrése..." style="width: 100%; padding: 8px 12px; box-sizing: border-box;">
+            </div>
+
+            <div id="doorDrawerListHu" class="door-drawer-body-hu">
+                <p>Itt jelenik meg a beállított forrásokból származó feldolgozott pályázati áttekintés.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const toggleCard = document.getElementById("toggleDoorPanelHu");
+            const closeBtn = document.getElementById("closeDoorPanelHu");
+            const drawer = document.getElementById("doorDrawerHu");
+            const ruleEl = document.getElementById("doorDividerRuleHu");
+            const listEl = document.getElementById("doorDrawerListHu");
+            const metaEl = document.getElementById("doorDrawerMetaHu");
+            const filterEl = document.getElementById("doorFilterInputHu");
+
+            // Predpísané / odporúčané kľúčové slová pre rýchle doplnenie a filtrovanie
+            const PRESET_KEYWORDS = [
+                "turizmus",
+                "vonzerő",
+                "kaland",
+                "sípálya",
+                "felvonó",
+                "eszközbeszerzés",
+                "fejlesztés",
+                "biztonság"
+            ];
+
+            const PRIMARY_KEYWORDS = [
+                "turizmus", "turisztik", "vonzerő", "kaland",
+                "sípálya", "felvonó", "szabadidő", "vidék", "eszközbeszerzés"
+            ];
+            const SECONDARY_KEYWORDS = [
+                "beruházás", "fejlesztés", "biztonság", "kiberbiztonság",
+                "digitaliz", "energiahatékony", "innováci"
+            ];
+
+            let relevantItems = [];
+            let selectedSource = "all";
+            let loadedOnce = false;
+
+            function scoreItem(row) {
+                const kwList = Array.isArray(row.keywords) ? row.keywords.map(k => String(k).toLowerCase()) : [];
+                const hay = `${row.title || ""} ${kwList.join(" ")}`.toLowerCase();
+
+                const pHits = PRIMARY_KEYWORDS.filter(kw => hay.includes(kw));
+                const sHits = SECONDARY_KEYWORDS.filter(kw => hay.includes(kw));
+                const allHits = Array.from(new Set([...kwList, ...pHits, ...sHits]));
+                const score = pHits.length * 3 + sHits.length * 1;
+
+                return {
+                    score,
+                    matchedKeywords: allHits
+                };
+            }
+
+            function applyKeywordToInput(keyword) {
+                if (!filterEl) return;
+                filterEl.value = keyword;
+                filterEl.dispatchEvent(new Event("input", {
+                    bubbles: true
+                }));
+                filterEl.focus();
+            }
+
+            function ensureHelperBars() {
+                if (!filterEl) return;
+
+                // 1. Lišta s predpísanými kľúčovými slovami na automatické doplnenie do okna
+                if (!document.getElementById("doorPresetKeywordsBarHu")) {
+                    const kwBar = document.createElement("div");
+                    kwBar.id = "doorPresetKeywordsBarHu";
+                    kwBar.style.cssText = "display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:8px;";
+
+                    const label = document.createElement("span");
+                    label.textContent = "Kulcsszavak:";
+                    label.style.cssText = "font-size:0.82rem; font-weight:600; color:#374151; margin-right:2px;";
+                    kwBar.appendChild(label);
+
+                    PRESET_KEYWORDS.forEach((kw) => {
+                        const chip = document.createElement("button");
+                        chip.type = "button";
+                        chip.className = "btn-cancel";
+                        chip.textContent = kw;
+                        chip.style.cssText = "padding:4px 9px; font-size:0.8rem;";
+                        chip.addEventListener("click", () => applyKeywordToInput(kw));
+                        kwBar.appendChild(chip);
+                    });
+
+                    const clearBtn = document.createElement("button");
+                    clearBtn.type = "button";
+                    clearBtn.className = "btn-cancel";
+                    clearBtn.textContent = "Törlés (Mind)";
+                    clearBtn.style.cssText = "padding:4px 9px; font-size:0.8rem;";
+                    clearBtn.addEventListener("click", () => applyKeywordToInput(""));
+                    kwBar.appendChild(clearBtn);
+
+                    filterEl.insertAdjacentElement("afterend", kwBar);
+                }
+
+                // 2. Lišta na filtrovanie podľa zdroja
+                const kwBarEl = document.getElementById("doorPresetKeywordsBarHu");
+                if (kwBarEl && !document.getElementById("doorSourceBarHu")) {
+                    const srcBar = document.createElement("div");
+                    srcBar.id = "doorSourceBarHu";
+                    srcBar.style.cssText = "display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;";
+                    srcBar.innerHTML = `
+                <button type="button" class="btn-cancel" data-src="all">Mind (Releváns)</button>
+                <button type="button" class="btn-cancel" data-src="palyazatmenedzser.hu">palyazatmenedzser.hu</button>
+                <button type="button" class="btn-cancel" data-src="palyazat.gov.hu">palyazat.gov.hu</button>
+            `;
+                    kwBarEl.insertAdjacentElement("afterend", srcBar);
+
+                    srcBar.addEventListener("click", (ev) => {
+                        const btn = ev.target.closest("button[data-src]");
+                        if (!btn) return;
+                        selectedSource = btn.getAttribute("data-src");
+                        renderItems(filterEl.value);
+                    });
+                }
+
+                // Predvyplnenie predpísaného kľúčového slova do vyhľadávacieho okna pri prvom otvorení
+                if (!filterEl.dataset.presetInitialized) {
+                    filterEl.dataset.presetInitialized = "1";
+                    filterEl.value = PRESET_KEYWORDS[0]; // predvolene "turizmus"
+                }
+            }
+
+            function renderItems(filterText = "") {
+                const q = filterText.trim().toLowerCase();
+                const matches = relevantItems.filter((row) => {
+                    const srcMatch = selectedSource === "all" || (row.source || "").toLowerCase().includes(selectedSource);
+                    const text = `${row.source || ""} ${row.title || ""} ${(row._matchedKeywords || []).join(" ")}`.toLowerCase();
+                    const textMatch = !q || text.includes(q);
+                    return srcMatch && textMatch;
+                });
+
+                if (matches.length === 0) {
+                    listEl.innerHTML = "<p>A megadott szűrőknek jelenleg nincs megfelelő irányadó pályázat.</p>";
+                    return;
+                }
+
+                listEl.innerHTML = matches.map((row) => {
+                    const fallbackUrl = (row.source || "").includes("gov.hu") ?
+                        "https://www.palyazat.gov.hu/" :
+                        "https://palyazatmenedzser.hu/palyazatok/";
+                    const link = (row.url || "").startsWith("http") ? row.url : fallbackUrl;
+                    const kws = (row._matchedKeywords || []).join(", ");
+                    return `
+                <div style="padding: 10px 0; border-bottom: 1px solid #d1d5db;">
+                    <div style="font-size: 0.82rem; color: #374151;">
+                        <strong>${row.source || "Forrás"}</strong>${row.date ? " • " + row.date : ""}${kws ? " • Kulcsszavak: " + kws : ""}
+                    </div>
+                    <div style="font-weight: 600; margin: 3px 0;">${row.title || "Névtelen tétel"}</div>
+                    <a href="${link}" target="_blank" rel="noopener noreferrer">Megnyitás ↗</a>
+                </div>
+            `;
+                }).join("");
+            }
+
+            async function fetchGrantsJson() {
+                const paths = ["/data/grants.json", "../data/grants.json"];
+                for (const p of paths) {
+                    try {
+                        const resp = await fetch(`${p}?t=${Date.now()}`);
+                        if (resp.ok) return await resp.json();
+                    } catch (_) {
+                        // skúsi ďalšiu cestu
+                    }
+                }
+                throw new Error("grants.json nem található");
+            }
+
+            async function loadGrants() {
+                ensureHelperBars();
+                if (loadedOnce) {
+                    renderItems(filterEl ? filterEl.value : "");
+                    return;
+                }
+                loadedOnce = true;
+
+                try {
+                    const data = await fetchGrantsJson();
+                    const rawItems = Array.isArray(data.items) ? data.items : [];
+
+                    relevantItems = rawItems
+                        .map((row) => {
+                            const info = scoreItem(row);
+                            return {...row,
+                                _score: info.score,
+                                _matchedKeywords: info.matchedKeywords
+                            };
+                        })
+                        .filter((row) => row._score > 0)
+                        .sort((a, b) => b._score - a._score);
+
+                    metaEl.textContent = `Frissítve: ${data.updated_at || "nincs megadva"} | Irányadó találatok: ${relevantItems.length} / ${rawItems.length}`;
+                    renderItems(filterEl ? filterEl.value : "");
+                } catch (e) {
+                    metaEl.textContent = "Még nincs betöltött adat (data/grants.json előkészítés alatt).";
+                    listEl.innerHTML = "<p>A szűrő készen áll – amint elérhető a data/grants.json, csak a releváns pályázatok jelennek meg.</p>";
+                }
+            }
+
+            function openDoorPanel() {
+                if (!drawer) return;
+                if (ruleEl) ruleEl.style.display = "none";
+                drawer.classList.add("is-open");
+                drawer.setAttribute("aria-hidden", "false");
+                if (toggleCard) toggleCard.setAttribute("aria-expanded", "true");
+                loadGrants();
+                drawer.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            }
+
+            function closeDoorPanel() {
+                if (!drawer) return;
+                drawer.classList.remove("is-open");
+                drawer.setAttribute("aria-hidden", "true");
+                if (toggleCard) toggleCard.setAttribute("aria-expanded", "false");
+                setTimeout(() => {
+                    if (!drawer.classList.contains("is-open") && ruleEl) {
+                        ruleEl.style.display = "";
+                    }
+                }, 500);
+            }
+
+            if (toggleCard) {
+                toggleCard.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const isOpen = drawer && drawer.classList.contains("is-open");
+                    if (isOpen) closeDoorPanel();
+                    else openDoorPanel();
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", closeDoorPanel);
+            }
+
+            if (filterEl) {
+                filterEl.addEventListener("input", () => renderItems(filterEl.value));
+            }
+        })();
+    </script>
 
     <hr class="rule">
 

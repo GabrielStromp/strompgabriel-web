@@ -120,6 +120,230 @@
             </div>
         </div>
     </section>
+    <hr class="rule">
+    <!-- ppre Slovenské podmienky              -->
+    <style>
+        /* Efekt "otvárania dverí" po celej šírke stránky na mieste deliacej čiary (0.5s) */
+        
+        .door-drawer-wrapper {
+            width: 100%;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(-12deg);
+            transform-origin: top center;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .door-drawer-wrapper.is-open {
+            max-height: 70vh;
+            opacity: 1;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        .door-drawer-inner {
+            width: 100%;
+            height: 70vh;
+            max-height: 70vh;
+            box-sizing: border-box;
+            background: #ffffff;
+            border-top: 2px solid #9ca3af;
+            border-bottom: 2px solid #9ca3af;
+            padding: 20px clamp(16px, 4vw, 48px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 8px 18px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .door-drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #d1d5db;
+        }
+        
+        .door-drawer-body {
+            flex: 1;
+            overflow-y: auto;
+            padding-top: 12px;
+        }
+        
+        @keyframes subtleDoorAmbient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .door-drawer-wrapper.is-open .door-drawer-inner {
+            background: linear-gradient( 125deg, rgba(199, 211, 224, 0.98) 0%, rgba(110, 95, 240, 0.98) 45%, rgba(178, 196, 218, 0.98) 100%);
+            background-size: 220% 220%;
+            animation: subtleDoorAmbient 10s ease-in-out infinite;
+            border-top: 2px solid #9ca3af;
+            border-bottom: 2px solid #9ca3af;
+        }
+        /* Ak si želáš statické pozadie namiesto pohybu, zmaž riadok "animation: ..." vyššie */
+        
+        @media (prefers-reduced-motion: reduce) {
+            .door-drawer-wrapper.is-open .door-drawer-inner {
+                animation: none;
+                background-position: 50% 50%;
+            }
+        }
+    </style>
+    <!-- pre Slovenské podmienky -->
+    <section id="vyhradena-sekcia">
+        <div class="wrap">
+            <div class="section-head">
+
+                <h3>Vyhradená sekcia</h3>
+
+            </div>
+            <div class="card-grid">
+                <a class="card" href="#otvorit-panel" id="toggleDoorPanel" role="button" aria-expanded="false" aria-controls="doorDrawer">
+                    <div class="card-body">
+                        <!-- výzvy granty ...................... -->
+                        <h3>Výzvy a prehľady</h3>
+                        <p>Odkazy na aktuálne výzvy.</p>
+                        <span class="card-link">Otvoriť ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule" id="doorDividerRule">
+
+    <!-- Rozotvárací panel po celej šírke na mieste deliacej čiary (0.5s) -->
+    <div id="doorDrawer" class="door-drawer-wrapper" aria-hidden="true">
+        <div class="door-drawer-inner" role="region" aria-label="Prehľad výziev">
+            <div class="door-drawer-header">
+                <div>
+                    <h3 style="margin: 0;">Prehľad výziev (Grantexpert a ďalšie zdroje)</h3>
+                    <small id="doorDrawerMeta" style="color: #6b7280;">Pripravené na načítanie spracovaných výziev...</small>
+                </div>
+                <button type="button" id="closeDoorPanel" class="btn-cancel">Zavrieť</button>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <input type="text" id="doorFilterInput" placeholder="Filtrovať výzvy..." style="width: 100%; padding: 8px 12px; box-sizing: border-box;">
+            </div>
+
+            <div id="doorDrawerList" class="door-drawer-body">
+                <p>Tu sa zobrazí spracovaný prehľad výziev z nastavených zdrojov.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const toggleCard = document.getElementById("toggleDoorPanel");
+            const closeBtn = document.getElementById("closeDoorPanel");
+            const drawer = document.getElementById("doorDrawer");
+            const ruleEl = document.getElementById("doorDividerRule");
+            const listEl = document.getElementById("doorDrawerList");
+            const metaEl = document.getElementById("doorDrawerMeta");
+            const filterEl = document.getElementById("doorFilterInput");
+
+            let itemsCache = [];
+            let loadedOnce = false;
+
+            function renderItems(filterText = "") {
+                const q = filterText.trim().toLowerCase();
+                const matches = itemsCache.filter((row) => {
+                    const text = `${row.source || ""} ${row.title || ""} ${(row.keywords || []).join(" ")}`.toLowerCase();
+                    return !q || text.includes(q);
+                });
+
+                if (matches.length === 0) {
+                    listEl.innerHTML = "<p>Žiadne položky nezodpovedajú zadanému filtru.</p>";
+                    return;
+                }
+
+                listEl.innerHTML = matches.map((row) => {
+                    const link = (row.url || "").startsWith("http") ? row.url : "https://www.palyazatmenedzser.hu/";
+                    const kws = Array.isArray(row.keywords) ? row.keywords.join(", ") : "";
+                    return `
+                <div style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;">
+                    <div style="font-size: 0.82rem; color: #6b7280;">
+                        <strong>${row.source || "Zdroj"}</strong>${row.date ? " • " + row.date : ""}${kws ? " • " + kws : ""}
+                    </div>
+                    <div style="font-weight: 600; margin: 3px 0;">${row.title || "Bez názvu"}</div>
+                    <a href="${link}" target="_blank" rel="noopener noreferrer">Otvoriť ↗</a>
+                </div>
+            `;
+                }).join("");
+            }
+
+            async function loadGrants() {
+                if (loadedOnce) return;
+                loadedOnce = true;
+                try {
+                    const resp = await fetch("/data/grants.json?t=" + Date.now());
+                    if (!resp.ok) throw new Error("HTTP " + resp.status);
+                    const data = await resp.json();
+                    itemsCache = Array.isArray(data.items) ? data.items : [];
+                    metaEl.textContent = `Aktualizované: ${data.updated_at || "neuvedené"} | Položiek: ${itemsCache.length}`;
+                    renderItems(filterEl ? filterEl.value : "");
+                } catch (e) {
+                    metaEl.textContent = "Zatiaľ bez načítaných dát zo /data/grants.json";
+                    listEl.innerHTML = "<p>Panel je pripravený – po doplnení dát sa tu zobrazia spracované výzvy.</p>";
+                }
+            }
+
+            function openDoorPanel() {
+                if (!drawer) return;
+                if (ruleEl) ruleEl.style.display = "none";
+                drawer.classList.add("is-open");
+                drawer.setAttribute("aria-hidden", "false");
+                if (toggleCard) toggleCard.setAttribute("aria-expanded", "true");
+                loadGrants();
+                drawer.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            }
+
+            function closeDoorPanel() {
+                if (!drawer) return;
+                drawer.classList.remove("is-open");
+                drawer.setAttribute("aria-hidden", "true");
+                if (toggleCard) toggleCard.setAttribute("aria-expanded", "false");
+                setTimeout(() => {
+                    if (!drawer.classList.contains("is-open") && ruleEl) {
+                        ruleEl.style.display = "";
+                    }
+                }, 500);
+            }
+
+            if (toggleCard) {
+                toggleCard.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const isOpen = drawer && drawer.classList.contains("is-open");
+                    if (isOpen) {
+                        closeDoorPanel();
+                    } else {
+                        openDoorPanel();
+                    }
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", closeDoorPanel);
+            }
+
+            if (filterEl) {
+                filterEl.addEventListener("input", () => renderItems(filterEl.value));
+            }
+        })();
+    </script>
 
     <hr class="rule">
 
