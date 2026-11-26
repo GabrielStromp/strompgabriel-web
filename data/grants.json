@@ -1,26 +1,25 @@
 {
-  "updated_at": "2026-11-25 21:32",
-  "items": [
-    {
-      "source": "palyazatmenedzser.hu",
-      "title": "Pályázat turisztikai fejlesztések támogatására",
-      "date": "2026-11-25",
-      "url": "https://palyazatmenedzser.hu/palyazatok/",
-      "keywords": ["turisztik", "fejlesztés"]
-    },
-    {
-      "source": "palyazat.gov.hu",
-      "title": "Turisztikai vonzerő és élményelemek fejlesztési támogatása",
-      "date": "2026-11-24",
-      "url": "https://www.palyazat.gov.hu/",
-      "keywords": ["turisztik", "vonzerő", "fejlesztés"]
-    },
-    {
-      "source": "palyazatmenedzser.hu",
-      "title": "Ganz Ábrahám Európai Uniós Vállalati Hitelprogram – KKV Technológia Plusz Budapest (GINOP Plusz-1.4.4-24)",
-      "date": "2026-11-25",
-      "url": "https://palyazatmenedzser.hu/palyazatok/",
-      "keywords": ["fejlesztés"]
-    }
-  ]
+    "updated_at": "2026-11-25 21:32",
+    "items": [{
+            "source": "palyazatmenedzser.hu",
+            "title": "Pályázat turisztikai fejlesztések támogatására",
+            "date": "2026-11-25",
+            "url": "https://palyazatmenedzser.hu/palyazatok/",
+            "keywords": ["turizmus", "turisztik", "vonzerő", "fejlesztés"]
+        },
+        {
+            "source": "palyazat.gov.hu",
+            "title": "Turisztikai vonzerő és élményelemek fejlesztési támogatása",
+            "date": "2026-11-24",
+            "url": "https://www.palyazat.gov.hu/",
+            "keywords": ["felvonó", "kaland", "kalandpark", "eszközbeszerzés", "sunkid"]
+        },
+        {
+            "source": "palyazatmenedzser.hu",
+            "title": "Ganz Ábrahám Európai Uniós Vállalati Hitelprogram – KKV Technológia Plusz Budapest (GINOP Plusz-1.4.4-24)",
+            "date": "2026-11-25",
+            "url": "https://palyazatmenedzser.hu/palyazatok/",
+            "keywords": ["fejlesztés"]
+        }
+    ]
 }
