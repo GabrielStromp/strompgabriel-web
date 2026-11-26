@@ -123,9 +123,7 @@
     <hr class="rule">
     <!-- ppre Slovenské podmienky              -->
     <style>
-        /* Efekt "otvárania dverí" po celej šírke stránky na mieste deliacej čiary (0.5s) */
-        
-        .door-drawer-wrapper {
+        .door-drawer-wrapper-sk {
             width: 100%;
             max-height: 0;
             opacity: 0;
@@ -135,42 +133,43 @@
             transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
         
-        .door-drawer-wrapper.is-open {
-            max-height: 70vh;
+        .door-drawer-wrapper-sk.is-open {
+            max-height: 2600px;
             opacity: 1;
             transform: perspective(1000px) rotateX(0deg);
         }
         
-        .door-drawer-inner {
+        .door-drawer-inner-sk {
             width: 100%;
-            height: 70vh;
-            max-height: 70vh;
+            height: auto;
+            max-height: none;
             box-sizing: border-box;
             background: #ffffff;
             border-top: 2px solid #9ca3af;
             border-bottom: 2px solid #9ca3af;
-            padding: 20px clamp(16px, 4vw, 48px);
+            padding: 20px clamp(14px, 4vw, 48px);
             display: flex;
             flex-direction: column;
             box-shadow: inset 0 8px 18px -12px rgba(0, 0, 0, 0.25);
         }
         
-        .door-drawer-header {
+        .door-drawer-header-sk {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             gap: 12px;
             padding-bottom: 12px;
             border-bottom: 1px solid #d1d5db;
         }
         
-        .door-drawer-body {
+        .door-drawer-body-sk {
             flex: 1;
-            overflow-y: auto;
+            overflow: visible;
             padding-top: 12px;
         }
         
-        @keyframes subtleDoorAmbient {
+        @keyframes subtleDoorAmbientSk {
             0% {
                 background-position: 0% 50%;
             }
@@ -182,22 +181,339 @@
             }
         }
         
-        .door-drawer-wrapper.is-open .door-drawer-inner {
-            background: linear-gradient( 125deg, rgba(199, 211, 224, 0.98) 0%, rgba(110, 95, 240, 0.98) 45%, rgba(178, 196, 218, 0.98) 100%);
+        .door-drawer-wrapper-sk.is-open .door-drawer-inner-sk {
+            background: linear-gradient(125deg, rgba(199, 211, 224, 0.98) 0%, rgba(110, 95, 240, 0.98) 45%, rgba(178, 196, 218, 0.98) 100%);
             background-size: 220% 220%;
-            animation: subtleDoorAmbient 10s ease-in-out infinite;
+            animation: subtleDoorAmbientSk 10s ease-in-out infinite;
             border-top: 2px solid #9ca3af;
             border-bottom: 2px solid #9ca3af;
         }
-        /* Ak si želáš statické pozadie namiesto pohybu, zmaž riadok "animation: ..." vyššie */
         
         @media (prefers-reduced-motion: reduce) {
-            .door-drawer-wrapper.is-open .door-drawer-inner {
+            .door-drawer-wrapper-sk.is-open .door-drawer-inner-sk {
                 animation: none;
                 background-position: 50% 50%;
             }
         }
+        
+        #vyhradena-sekcia-sk .card {
+            min-height: 0;
+            height: auto;
+        }
+        
+        #vyhradena-sekcia-sk .card .card-body {
+            padding-top: 14px;
+            padding-bottom: 14px;
+        }
     </style>
+
+    <section id="vyhradena-sekcia-sk">
+        <div class="wrap">
+            <div class="section-head">
+                <h3>Vyhradená sekcia</h3>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="#otvorit-panel" id="toggleDoorPanelSk" role="button" aria-expanded="false" aria-controls="doorDrawerSk">
+                    <div class="card-body">
+                        <h3>Výzvy a prehľady</h3>
+                        <p>Odkazy na aktuálne výzvy (školstvo, technológie, turizmus a rozvoj).</p>
+                        <span class="card-link">Otvoriť ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="rule" id="doorDividerRuleSk">
+
+    <div id="doorDrawerSk" class="door-drawer-wrapper-sk" aria-hidden="true">
+        <div class="door-drawer-inner-sk" role="region" aria-label="Prehľad výziev">
+            <div class="door-drawer-header-sk">
+                <div>
+                    <h3 style="margin: 0;">Prehľad výziev (školstvo, technológie a ďalšie zdroje)</h3>
+                    <small id="doorDrawerMetaSk" style="color: #1f2937;">Pripravené na načítanie dát...</small>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span id="doorActivityBadgeSk" style="font-size:0.78rem; padding:4px 9px; border-radius:999px; border:1px solid #d1d5db; background:#f3f4f6; color:#1f2937; white-space:nowrap;">● Čaká</span>
+                    <button type="button" id="closeDoorPanelSk" class="btn-cancel">Zavrieť</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <input type="text" id="doorFilterInputSk" placeholder="Filtrovať výzvy podľa kľúčového slova..." style="width: 100%; padding: 8px 12px; box-sizing: border-box;">
+            </div>
+
+            <div id="doorDrawerListSk" class="door-drawer-body-sk">
+                <p>Tu sa zobrazí prehľad výziev z nastaveného zdroja dát.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const toggleCard = document.getElementById("toggleDoorPanelSk");
+            const closeBtn = document.getElementById("closeDoorPanelSk");
+            const drawer = document.getElementById("doorDrawerSk");
+            const ruleEl = document.getElementById("doorDividerRuleSk");
+            const listEl = document.getElementById("doorDrawerListSk");
+            const metaEl = document.getElementById("doorDrawerMetaSk");
+            const filterEl = document.getElementById("doorFilterInputSk");
+
+            const PRESET_KEYWORDS_SK = [
+                "školstvo",
+                "vzdelávanie",
+                "robotika",
+                "informatika",
+                "digitalizácia",
+                "turizmus",
+                "atrakcie",
+                "rozvoj",
+                "bezpečnosť"
+            ];
+
+            const PRIMARY_KEYWORDS_SK = [
+                "školstvo", "škol", "vzdelávani", "výučb", "žiaci", "študent", "učiteľ",
+                "robotik", "informatik", "programovani", "digitalizáci", "technológi",
+                "turizmus", "cestovný ruch", "atrakci", "lanovk", "bobov", "rozvoj"
+            ];
+
+            const SECONDARY_KEYWORDS_SK = [
+                "inováci", "investíci", "bezpečnost", "región", "vidiek", "voľný čas", "súťaž"
+            ];
+
+            let relevantItems = [];
+            let loadedOnce = false;
+            let lastUpdatedLabel = "";
+            let totalRawCount = 0;
+            let lastFetchMs = null;
+
+            function ensureSpinStyle() {
+                if (document.getElementById("doorSpinStyleSk")) return;
+                const st = document.createElement("style");
+                st.id = "doorSpinStyleSk";
+                st.textContent = `@keyframes spinSk { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`;
+                document.head.appendChild(st);
+            }
+
+            function setActivity(busy, text) {
+                const badge = document.getElementById("doorActivityBadgeSk");
+                if (!badge) return;
+                if (busy) {
+                    badge.innerHTML = `<span style="display:inline-block; animation: spinSk 0.9s linear infinite;">⏳</span> ${text || "Spracúvam..."}`;
+                    badge.style.background = "#fef3c7";
+                    badge.style.color = "#92400e";
+                    badge.style.borderColor = "#f59e0b";
+                } else {
+                    badge.textContent = `● ${text || "Hotovo"}`;
+                    badge.style.background = "#ecfdf5";
+                    badge.style.color = "#065f46";
+                    badge.style.borderColor = "#10b981";
+                }
+            }
+
+            function scoreItem(row) {
+                const kwList = Array.isArray(row.keywords) ? row.keywords.map(k => String(k).toLowerCase()) : [];
+                const hay = `${row.title || ""} ${kwList.join(" ")}`.toLowerCase();
+
+                const pHits = PRIMARY_KEYWORDS_SK.filter(kw => hay.includes(kw));
+                const sHits = SECONDARY_KEYWORDS_SK.filter(kw => hay.includes(kw));
+                const allHits = Array.from(new Set([...kwList, ...pHits, ...sHits]));
+                const score = pHits.length * 3 + sHits.length * 1;
+
+                return {
+                    score,
+                    matchedKeywords: allHits
+                };
+            }
+
+            function applyKeyword(keyword) {
+                if (!filterEl) return;
+                if (!keyword) {
+                    filterEl.value = "";
+                } else {
+                    const parts = filterEl.value.trim().split(/\s+/).filter(Boolean);
+                    const exists = parts.some(p => p.toLowerCase() === keyword.toLowerCase());
+                    if (!exists) parts.push(keyword);
+                    filterEl.value = parts.join(" ");
+                }
+                filterEl.dispatchEvent(new Event("input", {
+                    bubbles: true
+                }));
+                filterEl.focus();
+            }
+
+            function ensureKeywordBar() {
+                if (!filterEl || document.getElementById("doorPresetKeywordsBarSk")) return;
+                const bar = document.createElement("div");
+                bar.id = "doorPresetKeywordsBarSk";
+                bar.style.cssText = "display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:8px;";
+
+                const lbl = document.createElement("span");
+                lbl.textContent = "Pridať kľúčové slovo:";
+                lbl.style.cssText = "font-size:0.82rem; font-weight:600; color:#1f2937; margin-right:2px;";
+                bar.appendChild(lbl);
+
+                PRESET_KEYWORDS_SK.forEach((kw) => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "btn-cancel";
+                    btn.textContent = "+ " + kw;
+                    btn.style.cssText = "padding:4px 9px; font-size:0.8rem;";
+                    btn.addEventListener("click", () => applyKeyword(kw));
+                    bar.appendChild(btn);
+                });
+
+                const clearBtn = document.createElement("button");
+                clearBtn.type = "button";
+                clearBtn.className = "btn-cancel";
+                clearBtn.textContent = "✕ Vymazať pole";
+                clearBtn.style.cssText = "padding:4px 9px; font-size:0.8rem;";
+                clearBtn.addEventListener("click", () => applyKeyword(""));
+                bar.appendChild(clearBtn);
+
+                filterEl.insertAdjacentElement("afterend", bar);
+            }
+
+            function renderItems(filterText = "") {
+                const t0 = performance.now();
+                setActivity(true, "Filtrujem...");
+
+                const terms = filterText.trim().toLowerCase().split(/\s+/).filter(Boolean);
+                const matches = relevantItems.filter((row) => {
+                    const hay = `${row.source || ""} ${row.title || ""} ${(row._matchedKeywords || []).join(" ")}`.toLowerCase();
+                    return terms.length === 0 || terms.every(t => hay.includes(t));
+                });
+
+                const filterMs = Math.max(1, Math.round(performance.now() - t0));
+                const fetchPart = lastFetchMs !== null ? ` | Načítanie: ${lastFetchMs} ms` : "";
+                const filterPart = terms.length > 0 ? ` | Filter: "${terms.join(" ")}"` : " | Filter: žiadny";
+
+                if (metaEl && loadedOnce) {
+                    metaEl.textContent = `Aktualizované: ${lastUpdatedLabel} | Zhody: ${matches.length} / ${relevantItems.length} relevantných (spolu: ${totalRawCount})${filterPart}${fetchPart} | Filter: ${filterMs} ms`;
+                }
+
+                if (matches.length === 0) {
+                    listEl.innerHTML = "<p>Zadaným kľúčovým slovám momentálne nezodpovedá žiadna výzva. Kliknite na <strong>✕ Vymazať pole</strong> pre zobrazenie všetkých relevantných položiek.</p>";
+                } else {
+                    listEl.innerHTML = matches.map((row) => {
+                        const link = (row.url || "").startsWith("http") ? row.url : "https://www.grantexpert.sk/";
+                        const kws = (row._matchedKeywords || []).join(", ");
+                        return `
+                    <div style="padding: 10px 0; border-bottom: 1px solid #d1d5db;">
+                        <div style="font-size: 0.82rem; color: #1f2937;">
+                            <strong>${row.source || "Zdroj"}</strong>${row.date ? " • " + row.date : ""}${kws ? " • Kľúčové slová: " + kws : ""}
+                        </div>
+                        <div style="font-weight: 600; margin: 3px 0;">${row.title || "Bez názvu"}</div>
+                        <a href="${link}" target="_blank" rel="noopener noreferrer">Otvoriť ↗</a>
+                    </div>
+                `;
+                    }).join("");
+                }
+
+                setActivity(false, `Hotovo (${filterMs} ms)`);
+            }
+
+            async function fetchSkGrantsJson() {
+                const paths = ["/data/grants-sk.json", "../data/grants-sk.json", "/grants-sk.json", "../grants-sk.json"];
+                for (const p of paths) {
+                    try {
+                        const resp = await fetch(`${p}?t=${Date.now()}`);
+                        if (resp.ok) return await resp.json();
+                    } catch (_) {
+                        // skúsi ďalšiu cestu
+                    }
+                }
+                throw new Error("grants-sk.json sa nenašiel");
+            }
+
+            async function loadGrants() {
+                ensureSpinStyle();
+                ensureKeywordBar();
+
+                if (loadedOnce) {
+                    renderItems(filterEl ? filterEl.value : "");
+                    return;
+                }
+
+                setActivity(true, "Načítavam JSON...");
+                if (metaEl) metaEl.textContent = "⏳ Načítavam dáta pre slovenskú verziu...";
+                if (listEl) {
+                    listEl.innerHTML = `<div style="display:flex; align-items:center; gap:10px; padding:14px 0;"><span style="font-size:1.3rem; display:inline-block; animation: spinSk 0.9s linear infinite;">⏳</span><span>Načítavam dáta z grants-sk.json...</span></div>`;
+                }
+
+                const tStart = performance.now();
+                try {
+                    const data = await fetchSkGrantsJson();
+                    lastFetchMs = Math.max(1, Math.round(performance.now() - tStart));
+
+                    const rawItems = Array.isArray(data.items) ? data.items : [];
+                    totalRawCount = rawItems.length;
+                    lastUpdatedLabel = data.updated_at || "neuvedené";
+
+                    relevantItems = rawItems
+                        .map((row) => {
+                            const info = scoreItem(row);
+                            return {...row,
+                                _score: info.score,
+                                _matchedKeywords: info.matchedKeywords
+                            };
+                        })
+                        .filter((row) => row._score > 0)
+                        .sort((a, b) => b._score - a._score);
+
+                    loadedOnce = true;
+                    renderItems(filterEl ? filterEl.value : "");
+                } catch (_) {
+                    lastFetchMs = Math.max(1, Math.round(performance.now() - tStart));
+                    setActivity(false, "Chýba JSON");
+                    if (metaEl) metaEl.textContent = "Zatiaľ nie je nahraný súbor grants-sk.json (pripravte data/grants-sk.json).";
+                    if (listEl) listEl.innerHTML = "<p>Panel je pripravený – po nahraní súboru <strong>data/grants-sk.json</strong> sa zobrazia relevantné výzvy.</p>";
+                }
+            }
+
+            function openPanel() {
+                if (!drawer) return;
+                if (ruleEl) ruleEl.style.display = "none";
+                drawer.classList.add("is-open");
+                drawer.setAttribute("aria-hidden", "false");
+                if (toggleCard) toggleCard.setAttribute("aria-expanded", "true");
+                loadGrants();
+                drawer.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            }
+
+            function closePanel() {
+                if (!drawer) return;
+                drawer.classList.remove("is-open");
+                drawer.setAttribute("aria-hidden", "true");
+                if (toggleCard) toggleCard.setAttribute("aria-expanded", "false");
+                setTimeout(() => {
+                    if (!drawer.classList.contains("is-open") && ruleEl) {
+                        ruleEl.style.display = "";
+                    }
+                }, 500);
+            }
+
+            if (toggleCard) {
+                toggleCard.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const isOpen = drawer && drawer.classList.contains("is-open");
+                    if (isOpen) closePanel();
+                    else openPanel();
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", closePanel);
+            }
+
+            if (filterEl) {
+                filterEl.addEventListener("input", () => renderItems(filterEl.value));
+            }
+        })();
+    </script>
     <!-- pre Slovenské podmienky -->
     <section id="vyhradena-sekcia">
         <div class="wrap">
