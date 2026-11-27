@@ -1,0 +1,37 @@
+name: Update Grants JSON Morning
+
+on:
+  schedule:
+    # 08:30 CET (zimný čas = UTC+1) -> 07:30 UTC
+    - cron: "30 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-grants:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run grants updater
+        run: python scripts/update_grants-h.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/grants-h.json
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: automatická ranná aktualizácia grants-h.json (08:30)"
+            git push
+          else
+            echo "Žiadne nové zmeny v data/grants-h.json"
+          fi

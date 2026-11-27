@@ -309,7 +309,7 @@
                     listEl.innerHTML = `
                 <div style="display:flex; align-items:center; gap:10px; padding:14px 0; font-weight:500;">
                     <span style="font-size:1.3rem;" aria-hidden="true">⏳</span>
-                    <span>Adatok betöltése a grants.json fájlból, kérem várjon...</span>
+                    <span>Adatok betöltése a grants-h.json fájlból, kérem várjon...</span>
                 </div>
             `;
                 }
@@ -453,7 +453,7 @@
             }
 
             async function fetchGrantsJson() {
-                const paths = ["/data/grants.json", "../data/grants.json", "/grants.json", "../grants.json"];
+                const paths = ["/data/grants-h.json", "../data/grants-h.json", "/grants-h.json", "../grants-h.json"];
                 for (const p of paths) {
                     try {
                         const resp = await fetch(`${p}?t=${Date.now()}`);
@@ -462,7 +462,7 @@
                         // skúsi ďalšiu cestu
                     }
                 }
-                throw new Error("grants.json nem található");
+                throw new Error("grants-h.json nem található");
             }
 
             async function loadGrants() {
@@ -493,8 +493,8 @@
                     loadedOnce = true;
                     renderItems(filterEl ? filterEl.value : "");
                 } catch (e) {
-                    metaEl.textContent = "Még nincs betöltött adat (grants.json ellenőrzés alatt).";
-                    listEl.innerHTML = "<p>A szűrő készen áll – amint elérhető a grants.json, csak a releváns pályázatok jelennek meg.</p>";
+                    metaEl.textContent = "Még nincs betöltött adat (grants-h.json ellenőrzés alatt).";
+                    listEl.innerHTML = "<p>A szűrő készen áll – amint elérhető a grants-h.json, csak a releváns pályázatok jelennek meg.</p>";
                 }
             }
 
