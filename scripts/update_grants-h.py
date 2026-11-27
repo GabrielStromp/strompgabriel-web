@@ -37,6 +37,47 @@ def parse_rss(source_name: str, xml_bytes: bytes) -> list[dict]:
     root = ET.fromstring(xml_bytes)
     items = []
 
+    for elem in root.findall(".//item") + root.findall(".//{http://www.w3.org/2005/Atom}entry"):
+        title_el = elem.find("title")
+        if title_el is None:
+            title_el = elem.find("{http://www.w3.org/2005/Atom}title")
+        title = clean_text(title_el.text if title_el is not None else "")
+
+        desc_el = elem.find("description")
+        if desc_el is None:
+            desc_el = elem.find("{http://www.w3.org/2005/Atom}summary")
+        desc = clean_text(desc_el.text if desc_el is not None else "")
+
+        link = ""
+        link_el = elem.find("link")
+        if link_el is not None and link_el.text:
+            link = link_el.text.strip()
+        else:
+            atom_link = elem.find("{http://www.w3.org/2005/Atom}link")
+            if atom_link is not None:
+                link = (atom_link.attrib.get("href") or "").strip()
+
+        pub_el = elem.find("pubDate")
+        if pub_el is None:
+            pub_el = elem.find("{http://www.w3.org/2005/Atom}updated")
+        date_str = clean_text(pub_el.text if pub_el is not None else "")[:16]
+
+        haystack = f"{title} {desc}".lower()
+        matched_kw = [kw for kw in KEYWORDS if kw in haystack]
+        if title and matched_kw:
+            items.append({
+                "source": source_name,
+                "title": title,
+                "date": date_str,
+                "url": link,
+                "keywords": matched_kw
+            })
+
+    return items
+    
+    root = ET.fromstring(xml_bytes)
+    items = []
+
     # Podpora štandardného RSS (<item>) aj Atom (<entry>)
     for elem in root.findall(".//item") + root.findall(".//{http://www.w3.org/2005/Atom}entry"):
         title_el = elem.find("title")
