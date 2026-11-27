@@ -13,7 +13,8 @@ KEYWORDS = [
     "turizmus", "turisztik", "vonzerő", "kaland", "élmény",
     "sípálya", "felvonó", "kötélpálya", "bob", "szabadidő",
     "vidék", "eszközbeszerzés", "beruházás", "fejlesztés",
-    "biztonság", "digitaliz", "energiahatékony", "innováci"
+    "biztonság", "digitaliz", "energiahatékony", "innováci",
+    "fejleszt" , "fejlesztés"
 ]
 
 OUTPUT_PATH = os.path.join("data", "grants-h.json")
@@ -74,7 +75,7 @@ def parse_rss(source_name: str, xml_bytes: bytes) -> list[dict]:
             })
 
     return items
-    
+
     root = ET.fromstring(xml_bytes)
     items = []
 
